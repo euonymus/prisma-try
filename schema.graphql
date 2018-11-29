@@ -1,6 +1,7 @@
 scalar DateTime
 
 type Query {
+  quark(name: String!): Quark
   quarks: [Quark!]!
   gluons: [Gluon!]!
   users: [User!]!
@@ -18,17 +19,6 @@ type Mutation {
   deleteUser(userId: ID!): User
   createDraft(title: String!, userId: ID!): Post
   publish(postId: ID!): Post
-}
-
-type User {
-  id: ID!
-  email: String
-  name: String!
-  password: String!
-  role: String
-  createdAt: DateTime!
-  updatedAt: DateTime!
-  posts: [Post!]!
 }
 
 type Quark {
@@ -70,6 +60,17 @@ type Gluon {
   updatedAt: DateTime!
 }
 
+
+type User {
+  id: ID!
+  email: String
+  name: String!
+  password: String!
+  role: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  posts: [Post!]!
+}
 
 type Post {
   id: ID!

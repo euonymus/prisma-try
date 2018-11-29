@@ -3,6 +3,9 @@ const { GraphQLServer } = require('graphql-yoga')
 
 const resolvers = {
   Query: {
+    quark(root, args, context) {
+      return context.prisma.quark({ name: args.name })
+    },
     quarks(root, args, context) {
       return context.prisma.quarks()
     },
