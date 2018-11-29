@@ -1,4 +1,17 @@
 # mutation {
+#   createGluonType(
+#     name: "founderOf",
+#     caption: "is a founder of",
+#     captionJa: "の創業者",
+#     sort1: 36,
+#     sort2: 13
+#   ) {
+#     id
+#     name
+#   }
+# }
+
+# mutation {
 #   createQuarkType(
 #     name: "Person",
 #     imagePath: "/img/person.png",
@@ -14,12 +27,12 @@
 #   }
 # }
 
-query {
-  quarkTypes {
-    id
-    name
-  }
-}
+# query {
+#   quarkTypes {
+#     id
+#     name
+#   }
+# }
 
 # mutation {
 #   createQuark(name: "euonymus", description: "architect") {
@@ -30,8 +43,9 @@ query {
 
 
 # mutation {
-#   updateQuark(quarkId: "cjp28z92n00eo0a86qz6cv7f4",
-#               name: "euonymus",
+#   updateQuark(quarkId: "cjp28yx7600el0a86kb3bsrl6",
+#               name: "gluons",
+#               quarkTypeId: "cjp2cq1t700iw0a86ps7h71ws"
 #     					userId: "cjp24p6vi007e0a8686778iqx"
 #   ) {
 #     id
@@ -39,6 +53,9 @@ query {
 #     author {
 #       name
 #     }
+#     quarkType {
+#       name
+#     }
 #     lastModifiedUser {
 #       name
 #     }
@@ -47,107 +64,15 @@ query {
 
 
 
-# query {
-#   quark(name: "pepepe") {
+# mutation {
+#   updateGluon(gluonId: "cjp295u2z00fd0a86qjvdaeo6",
+#               gluonTypeId: "cjp2dzcrd00jy0a864s22r6vg"
+#     					userId: "cjp24p6vi007e0a8686778iqx"
+#   ) {
 #     id
-#     name
-#   }
-# }
-
-
-# query {
-#   quark(name: "gluons") {
-#     id
-#     name
-#     actives {
-#       relation
-#       activeQuark {
-#         name
-#         actives {
-#           relation
-#           activeQuark {
-#             name
-#           }
-#           passiveQuark {
-#             name
-#           }
-#         }
-#         passives {
-#           relation
-#           activeQuark {
-#             name
-#           }
-#           passiveQuark {
-#             name
-#           }
-#         }
-#       }
-#       passiveQuark {
-#         name
-#         actives {
-#           relation
-#           activeQuark {
-#             name
-#           }
-#           passiveQuark {
-#             name
-#           }
-#         }
-#         passives {
-#           relation
-#           activeQuark {
-#             name
-#           }
-#           passiveQuark {
-#             name
-#           }
-#         }
-#       }
-#     }
-#     passives {
-#       relation
-#       activeQuark {
-#         name
-#         actives {
-#           relation
-#           activeQuark {
-#             name
-#           }
-#           passiveQuark {
-#             name
-#           }
-#         }
-#         passives {
-#           relation
-#           activeQuark {
-#             name
-#           }
-#           passiveQuark {
-#             name
-#           }
-#         }
-#       }
-#       passiveQuark {
-#         name
-#         actives {
-#           relation
-#           activeQuark {
-#             name
-#           }
-#           passiveQuark {
-#             name
-#           }
-#         }
-#         passives {
-#           relation
-#           activeQuark {
-#             name
-#           }
-#           passiveQuark {
-#             name
-#           }
-#         }
-#       }
+#     relation
+#     gluonType {
+#       name
 #     }
 #     author {
 #       name
@@ -157,6 +82,129 @@ query {
 #     }
 #   }
 # }
+
+# query {
+#   gluonTypes {
+#     id
+#     name
+#   }
+# }
+
+# query {
+#   quark(name: "euonymus") {
+#     id
+#     name
+#     quarkType {
+#       name
+#     }
+#   }
+# }
+
+query {
+  quark(name: "gluons") {
+    id
+    name
+    quarkType {
+      name
+    }
+    actives {
+      relation
+      activeQuark {
+        name
+        actives {
+          relation
+          activeQuark {
+            name
+          }
+          passiveQuark {
+            name
+          }
+        }
+        passives {
+          relation
+          activeQuark {
+            name
+          }
+          passiveQuark {
+            name
+          }
+        }
+      }
+      passiveQuark {
+        name
+        actives {
+          relation
+          activeQuark {
+            name
+          }
+          passiveQuark {
+            name
+          }
+        }
+        passives {
+          relation
+          activeQuark {
+            name
+          }
+          passiveQuark {
+            name
+          }
+        }
+      }
+    }
+    passives {
+      relation
+      activeQuark {
+        name
+        actives {
+          relation
+          activeQuark {
+            name
+          }
+          passiveQuark {
+            name
+          }
+        }
+        passives {
+          relation
+          activeQuark {
+            name
+          }
+          passiveQuark {
+            name
+          }
+        }
+      }
+      passiveQuark {
+        name
+        actives {
+          relation
+          activeQuark {
+            name
+          }
+          passiveQuark {
+            name
+          }
+        }
+        passives {
+          relation
+          activeQuark {
+            name
+          }
+          passiveQuark {
+            name
+          }
+        }
+      }
+    }
+    author {
+      name
+    }
+    lastModifiedUser {
+      name
+    }
+  }
+}
 
 # query {
 #  	quarks {
@@ -269,4 +317,5 @@ query {
 #     title
 #   }
 # }
+
 
