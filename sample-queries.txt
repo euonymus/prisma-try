@@ -1,0 +1,171 @@
+# mutation {
+#   createQuark(name: "euonymus", description: "architect") {
+#     id
+#     description
+#   }
+# }
+
+query {
+  quark(name: "euonymus") {
+    id
+    name
+    actives {
+      relation
+      activeQuark {
+        name
+        actives {
+          relation
+          activeQuark {
+            name
+          }
+          passiveQuark {
+            name
+          }
+        }
+        passives {
+          relation
+          activeQuark {
+            name
+          }
+          passiveQuark {
+            name
+          }
+        }
+      }
+      passiveQuark {
+        name
+        actives {
+          relation
+          activeQuark {
+            name
+          }
+          passiveQuark {
+            name
+          }
+        }
+        passives {
+          relation
+          activeQuark {
+            name
+          }
+          passiveQuark {
+            name
+          }
+        }
+      }
+    }
+  }
+}
+
+# query {
+#  	quarks {
+#   	id
+#   	name
+#     description
+#     start
+#     end
+#     actives{
+#       id
+#       relation
+#     }
+#     passives{
+#       id
+#       relation
+#     }
+#     createdAt
+#     updatedAt
+# 	}
+# }
+
+# query {
+#  	gluons {
+#   	id
+#     relation
+#     activeQuark{
+#       name
+#     }
+#     passiveQuark{
+#       name
+#     }
+#     createdAt
+#     updatedAt
+# 	}
+# }
+
+
+# mutation {
+#   createGluon(activeId: "cjp28z92n00eo0a86qz6cv7f4", passiveId: "cjp28yx7600el0a86kb3bsrl6", relation: "is the architect of") {
+#     id
+#     activeQuark{
+#       id
+#     }
+#     passiveQuark{
+#       id
+#     }
+#     relation
+#   }
+# }
+
+
+# mutation {
+#   createUser(name: "euonymus", password: "hoge") {
+#     id
+#     password
+#   }
+# }
+
+# query {
+#  	users {
+#   	id
+#   	name
+#     password
+#     email
+#     role
+#     createdAt
+#     updatedAt
+#     posts {
+#       id
+#     }
+# 	}
+# }
+
+# mutation {
+# 	deleteUser(userId: "cjp24ezoe006i0a86595b83oa") {
+#     id
+#     name
+#   }
+# }
+
+
+# mutation {
+#   deleteQuark(quarkId: "cjp24yzrz00800a86tpdll971") {
+#     id
+#     name
+#   }
+# }
+
+# mutation {
+#   deleteGluon(gluonId: "cjp2901xk00es0a86l410y8os") {
+#     id
+#     # activeQuark{
+#     #   name
+#     # }
+#     # passiveQuark {
+#     #   name
+#     # }
+#     relation
+#   }
+# }
+
+
+# mutation {
+#   createDraft(title: "pp", userId: "cjp24pb0j007h0a86wce30lo8") {
+#     id
+#   }
+# }
+
+# query {
+#   postsByUser(userId: "cjp24pb0j007h0a86wce30lo8") {
+#     title
+#   }
+# }
