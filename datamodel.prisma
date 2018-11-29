@@ -57,6 +57,7 @@ type Gluon {
   isExclusive: Boolean @default(value: "false")
   author: User @relation(name: "GluonUser")
   lastModifiedUser: User @relation(name: "GluonLastModifiedUser")
+  gluonType: GluonType
   createdAt: DateTime!
   updatedAt: DateTime!
 }

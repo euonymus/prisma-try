@@ -101,6 +101,23 @@ const resolvers = {
         },
       )
     },
+    updateGluon(root, args, context) {
+      return context.prisma.updateGluon(
+        {
+          where: { id: args.gluonId },
+          data: {
+            relation: args.relation,
+            suffix: args.suffix,
+            lastModifiedUser: {
+              connect: { id: args.userId }
+            },
+            gluonType: {
+              connect: { id: args.gluonTypeId }
+            }
+          },
+        },
+      )
+    },
     deleteGluon(root, args, context) {
       return context.prisma.deleteGluon(
         {
@@ -201,6 +218,11 @@ const resolvers = {
       return context.prisma.gluon({
         id: root.id
       }).lastModifiedUser()
+    },
+    gluonType(root, args, context) {
+      return context.prisma.gluon({
+        id: root.id
+      }).gluonType()
     }
   }
 }

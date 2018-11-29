@@ -45,6 +45,7 @@ type Gluon {
   isExclusive: Boolean
   author: User
   lastModifiedUser: User
+  gluonType: GluonType
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -70,6 +71,7 @@ input GluonCreateInput {
   isExclusive: Boolean
   author: UserCreateOneInput
   lastModifiedUser: UserCreateOneInput
+  gluonType: GluonTypeCreateOneInput
 }
 
 input GluonCreateManyWithoutActiveQuarkInput {
@@ -96,6 +98,7 @@ input GluonCreateWithoutActiveQuarkInput {
   isExclusive: Boolean
   author: UserCreateOneInput
   lastModifiedUser: UserCreateOneInput
+  gluonType: GluonTypeCreateOneInput
 }
 
 input GluonCreateWithoutPassiveQuarkInput {
@@ -112,6 +115,7 @@ input GluonCreateWithoutPassiveQuarkInput {
   isExclusive: Boolean
   author: UserCreateOneInput
   lastModifiedUser: UserCreateOneInput
+  gluonType: GluonTypeCreateOneInput
 }
 
 type GluonEdge {
@@ -207,6 +211,11 @@ input GluonTypeCreateInput {
   sort2: Int!
 }
 
+input GluonTypeCreateOneInput {
+  create: GluonTypeCreateInput
+  connect: GluonTypeWhereUniqueInput
+}
+
 type GluonTypeEdge {
   node: GluonType!
   cursor: String!
@@ -260,6 +269,14 @@ input GluonTypeSubscriptionWhereInput {
   NOT: [GluonTypeSubscriptionWhereInput!]
 }
 
+input GluonTypeUpdateDataInput {
+  name: String
+  caption: String
+  captionJa: String
+  sort1: Int
+  sort2: Int
+}
+
 input GluonTypeUpdateInput {
   name: String
   caption: String
@@ -274,6 +291,20 @@ input GluonTypeUpdateManyMutationInput {
   captionJa: String
   sort1: Int
   sort2: Int
+}
+
+input GluonTypeUpdateOneInput {
+  create: GluonTypeCreateInput
+  update: GluonTypeUpdateDataInput
+  upsert: GluonTypeUpsertNestedInput
+  delete: Boolean
+  disconnect: Boolean
+  connect: GluonTypeWhereUniqueInput
+}
+
+input GluonTypeUpsertNestedInput {
+  update: GluonTypeUpdateDataInput!
+  create: GluonTypeCreateInput!
 }
 
 input GluonTypeWhereInput {
@@ -390,6 +421,7 @@ input GluonUpdateInput {
   isExclusive: Boolean
   author: UserUpdateOneInput
   lastModifiedUser: UserUpdateOneInput
+  gluonType: GluonTypeUpdateOneInput
 }
 
 input GluonUpdateManyMutationInput {
@@ -437,6 +469,7 @@ input GluonUpdateWithoutActiveQuarkDataInput {
   isExclusive: Boolean
   author: UserUpdateOneInput
   lastModifiedUser: UserUpdateOneInput
+  gluonType: GluonTypeUpdateOneInput
 }
 
 input GluonUpdateWithoutPassiveQuarkDataInput {
@@ -453,6 +486,7 @@ input GluonUpdateWithoutPassiveQuarkDataInput {
   isExclusive: Boolean
   author: UserUpdateOneInput
   lastModifiedUser: UserUpdateOneInput
+  gluonType: GluonTypeUpdateOneInput
 }
 
 input GluonUpdateWithWhereUniqueWithoutActiveQuarkInput {
@@ -588,6 +622,7 @@ input GluonWhereInput {
   isExclusive_not: Boolean
   author: UserWhereInput
   lastModifiedUser: UserWhereInput
+  gluonType: GluonTypeWhereInput
   createdAt: DateTime
   createdAt_not: DateTime
   createdAt_in: [DateTime!]

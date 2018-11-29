@@ -471,6 +471,7 @@ export interface GluonUpdateInput {
   isExclusive?: Boolean;
   author?: UserUpdateOneInput;
   lastModifiedUser?: UserUpdateOneInput;
+  gluonType?: GluonTypeUpdateOneInput;
 }
 
 export type GluonWhereUniqueInput = AtLeastOne<{
@@ -585,38 +586,6 @@ export interface UserWhereInput {
   NOT?: UserWhereInput[] | UserWhereInput;
 }
 
-export interface GluonCreateInput {
-  activeQuark: QuarkCreateOneWithoutActivesInput;
-  passiveQuark: QuarkCreateOneWithoutPassivesInput;
-  relation: String;
-  suffix?: String;
-  start?: DateTimeInput;
-  end?: DateTimeInput;
-  startAccuracy?: String;
-  endAccuracy?: String;
-  isMomentary?: Boolean;
-  url?: String;
-  isPrivate?: Boolean;
-  isExclusive?: Boolean;
-  author?: UserCreateOneInput;
-  lastModifiedUser?: UserCreateOneInput;
-}
-
-export interface GluonUpdateWithWhereUniqueWithoutActiveQuarkInput {
-  where: GluonWhereUniqueInput;
-  data: GluonUpdateWithoutActiveQuarkDataInput;
-}
-
-export interface QuarkCreateOneWithoutActivesInput {
-  create?: QuarkCreateWithoutActivesInput;
-  connect?: QuarkWhereUniqueInput;
-}
-
-export interface PostUpdateWithWhereUniqueWithoutAuthorInput {
-  where: PostWhereUniqueInput;
-  data: PostUpdateWithoutAuthorDataInput;
-}
-
 export interface QuarkCreateWithoutActivesInput {
   name: String;
   imagePath?: String;
@@ -636,6 +605,39 @@ export interface QuarkCreateWithoutActivesInput {
   wid?: Int;
   quarkType?: QuarkTypeCreateOneInput;
   passives?: GluonCreateManyWithoutPassiveQuarkInput;
+}
+
+export interface GluonUpdateManyWithoutActiveQuarkInput {
+  create?:
+    | GluonCreateWithoutActiveQuarkInput[]
+    | GluonCreateWithoutActiveQuarkInput;
+  delete?: GluonWhereUniqueInput[] | GluonWhereUniqueInput;
+  connect?: GluonWhereUniqueInput[] | GluonWhereUniqueInput;
+  disconnect?: GluonWhereUniqueInput[] | GluonWhereUniqueInput;
+  update?:
+    | GluonUpdateWithWhereUniqueWithoutActiveQuarkInput[]
+    | GluonUpdateWithWhereUniqueWithoutActiveQuarkInput;
+  upsert?:
+    | GluonUpsertWithWhereUniqueWithoutActiveQuarkInput[]
+    | GluonUpsertWithWhereUniqueWithoutActiveQuarkInput;
+}
+
+export interface UserCreateOneInput {
+  create?: UserCreateInput;
+  connect?: UserWhereUniqueInput;
+}
+
+export interface PostUpdateWithWhereUniqueWithoutAuthorInput {
+  where: PostWhereUniqueInput;
+  data: PostUpdateWithoutAuthorDataInput;
+}
+
+export interface UserCreateInput {
+  email?: String;
+  name: String;
+  password: String;
+  role?: String;
+  posts?: PostCreateManyWithoutAuthorInput;
 }
 
 export interface GluonWhereInput {
@@ -749,6 +751,7 @@ export interface GluonWhereInput {
   isExclusive_not?: Boolean;
   author?: UserWhereInput;
   lastModifiedUser?: UserWhereInput;
+  gluonType?: GluonTypeWhereInput;
   createdAt?: DateTimeInput;
   createdAt_not?: DateTimeInput;
   createdAt_in?: DateTimeInput[] | DateTimeInput;
@@ -770,9 +773,9 @@ export interface GluonWhereInput {
   NOT?: GluonWhereInput[] | GluonWhereInput;
 }
 
-export interface UserCreateOneInput {
-  create?: UserCreateInput;
-  connect?: UserWhereUniqueInput;
+export interface PostCreateManyWithoutAuthorInput {
+  create?: PostCreateWithoutAuthorInput[] | PostCreateWithoutAuthorInput;
+  connect?: PostWhereUniqueInput[] | PostWhereUniqueInput;
 }
 
 export interface QuarkTypeWhereInput {
@@ -899,148 +902,36 @@ export interface QuarkTypeWhereInput {
   NOT?: QuarkTypeWhereInput[] | QuarkTypeWhereInput;
 }
 
-export interface UserCreateInput {
-  email?: String;
-  name: String;
-  password: String;
-  role?: String;
-  posts?: PostCreateManyWithoutAuthorInput;
-}
-
-export interface QuarkSubscriptionWhereInput {
-  mutation_in?: MutationType[] | MutationType;
-  updatedFields_contains?: String;
-  updatedFields_contains_every?: String[] | String;
-  updatedFields_contains_some?: String[] | String;
-  node?: QuarkWhereInput;
-  AND?: QuarkSubscriptionWhereInput[] | QuarkSubscriptionWhereInput;
-  OR?: QuarkSubscriptionWhereInput[] | QuarkSubscriptionWhereInput;
-  NOT?: QuarkSubscriptionWhereInput[] | QuarkSubscriptionWhereInput;
-}
-
-export interface PostCreateManyWithoutAuthorInput {
-  create?: PostCreateWithoutAuthorInput[] | PostCreateWithoutAuthorInput;
-  connect?: PostWhereUniqueInput[] | PostWhereUniqueInput;
-}
-
-export interface GluonTypeSubscriptionWhereInput {
-  mutation_in?: MutationType[] | MutationType;
-  updatedFields_contains?: String;
-  updatedFields_contains_every?: String[] | String;
-  updatedFields_contains_some?: String[] | String;
-  node?: GluonTypeWhereInput;
-  AND?: GluonTypeSubscriptionWhereInput[] | GluonTypeSubscriptionWhereInput;
-  OR?: GluonTypeSubscriptionWhereInput[] | GluonTypeSubscriptionWhereInput;
-  NOT?: GluonTypeSubscriptionWhereInput[] | GluonTypeSubscriptionWhereInput;
-}
-
 export interface PostCreateWithoutAuthorInput {
   title: String;
   published?: Boolean;
 }
 
-export type GluonTypeWhereUniqueInput = AtLeastOne<{
-  id: ID_Input;
-  name?: String;
-}>;
+export interface QuarkTypeSubscriptionWhereInput {
+  mutation_in?: MutationType[] | MutationType;
+  updatedFields_contains?: String;
+  updatedFields_contains_every?: String[] | String;
+  updatedFields_contains_some?: String[] | String;
+  node?: QuarkTypeWhereInput;
+  AND?: QuarkTypeSubscriptionWhereInput[] | QuarkTypeSubscriptionWhereInput;
+  OR?: QuarkTypeSubscriptionWhereInput[] | QuarkTypeSubscriptionWhereInput;
+  NOT?: QuarkTypeSubscriptionWhereInput[] | QuarkTypeSubscriptionWhereInput;
+}
 
 export interface QuarkTypeCreateOneInput {
   create?: QuarkTypeCreateInput;
   connect?: QuarkTypeWhereUniqueInput;
 }
 
-export interface GluonTypeWhereInput {
-  id?: ID_Input;
-  id_not?: ID_Input;
-  id_in?: ID_Input[] | ID_Input;
-  id_not_in?: ID_Input[] | ID_Input;
-  id_lt?: ID_Input;
-  id_lte?: ID_Input;
-  id_gt?: ID_Input;
-  id_gte?: ID_Input;
-  id_contains?: ID_Input;
-  id_not_contains?: ID_Input;
-  id_starts_with?: ID_Input;
-  id_not_starts_with?: ID_Input;
-  id_ends_with?: ID_Input;
-  id_not_ends_with?: ID_Input;
-  name?: String;
-  name_not?: String;
-  name_in?: String[] | String;
-  name_not_in?: String[] | String;
-  name_lt?: String;
-  name_lte?: String;
-  name_gt?: String;
-  name_gte?: String;
-  name_contains?: String;
-  name_not_contains?: String;
-  name_starts_with?: String;
-  name_not_starts_with?: String;
-  name_ends_with?: String;
-  name_not_ends_with?: String;
-  caption?: String;
-  caption_not?: String;
-  caption_in?: String[] | String;
-  caption_not_in?: String[] | String;
-  caption_lt?: String;
-  caption_lte?: String;
-  caption_gt?: String;
-  caption_gte?: String;
-  caption_contains?: String;
-  caption_not_contains?: String;
-  caption_starts_with?: String;
-  caption_not_starts_with?: String;
-  caption_ends_with?: String;
-  caption_not_ends_with?: String;
-  captionJa?: String;
-  captionJa_not?: String;
-  captionJa_in?: String[] | String;
-  captionJa_not_in?: String[] | String;
-  captionJa_lt?: String;
-  captionJa_lte?: String;
-  captionJa_gt?: String;
-  captionJa_gte?: String;
-  captionJa_contains?: String;
-  captionJa_not_contains?: String;
-  captionJa_starts_with?: String;
-  captionJa_not_starts_with?: String;
-  captionJa_ends_with?: String;
-  captionJa_not_ends_with?: String;
-  sort1?: Int;
-  sort1_not?: Int;
-  sort1_in?: Int[] | Int;
-  sort1_not_in?: Int[] | Int;
-  sort1_lt?: Int;
-  sort1_lte?: Int;
-  sort1_gt?: Int;
-  sort1_gte?: Int;
-  sort2?: Int;
-  sort2_not?: Int;
-  sort2_in?: Int[] | Int;
-  sort2_not_in?: Int[] | Int;
-  sort2_lt?: Int;
-  sort2_lte?: Int;
-  sort2_gt?: Int;
-  sort2_gte?: Int;
-  createdAt?: DateTimeInput;
-  createdAt_not?: DateTimeInput;
-  createdAt_in?: DateTimeInput[] | DateTimeInput;
-  createdAt_not_in?: DateTimeInput[] | DateTimeInput;
-  createdAt_lt?: DateTimeInput;
-  createdAt_lte?: DateTimeInput;
-  createdAt_gt?: DateTimeInput;
-  createdAt_gte?: DateTimeInput;
-  updatedAt?: DateTimeInput;
-  updatedAt_not?: DateTimeInput;
-  updatedAt_in?: DateTimeInput[] | DateTimeInput;
-  updatedAt_not_in?: DateTimeInput[] | DateTimeInput;
-  updatedAt_lt?: DateTimeInput;
-  updatedAt_lte?: DateTimeInput;
-  updatedAt_gt?: DateTimeInput;
-  updatedAt_gte?: DateTimeInput;
-  AND?: GluonTypeWhereInput[] | GluonTypeWhereInput;
-  OR?: GluonTypeWhereInput[] | GluonTypeWhereInput;
-  NOT?: GluonTypeWhereInput[] | GluonTypeWhereInput;
+export interface PostSubscriptionWhereInput {
+  mutation_in?: MutationType[] | MutationType;
+  updatedFields_contains?: String;
+  updatedFields_contains_every?: String[] | String;
+  updatedFields_contains_some?: String[] | String;
+  node?: PostWhereInput;
+  AND?: PostSubscriptionWhereInput[] | PostSubscriptionWhereInput;
+  OR?: PostSubscriptionWhereInput[] | PostSubscriptionWhereInput;
+  NOT?: PostSubscriptionWhereInput[] | PostSubscriptionWhereInput;
 }
 
 export interface QuarkTypeCreateInput {
@@ -1054,6 +945,46 @@ export interface QuarkTypeCreateInput {
   sort2: Int;
 }
 
+export interface GluonSubscriptionWhereInput {
+  mutation_in?: MutationType[] | MutationType;
+  updatedFields_contains?: String;
+  updatedFields_contains_every?: String[] | String;
+  updatedFields_contains_some?: String[] | String;
+  node?: GluonWhereInput;
+  AND?: GluonSubscriptionWhereInput[] | GluonSubscriptionWhereInput;
+  OR?: GluonSubscriptionWhereInput[] | GluonSubscriptionWhereInput;
+  NOT?: GluonSubscriptionWhereInput[] | GluonSubscriptionWhereInput;
+}
+
+export interface GluonCreateManyWithoutPassiveQuarkInput {
+  create?:
+    | GluonCreateWithoutPassiveQuarkInput[]
+    | GluonCreateWithoutPassiveQuarkInput;
+  connect?: GluonWhereUniqueInput[] | GluonWhereUniqueInput;
+}
+
+export type GluonTypeWhereUniqueInput = AtLeastOne<{
+  id: ID_Input;
+  name?: String;
+}>;
+
+export interface GluonCreateWithoutPassiveQuarkInput {
+  activeQuark: QuarkCreateOneWithoutActivesInput;
+  relation: String;
+  suffix?: String;
+  start?: DateTimeInput;
+  end?: DateTimeInput;
+  startAccuracy?: String;
+  endAccuracy?: String;
+  isMomentary?: Boolean;
+  url?: String;
+  isPrivate?: Boolean;
+  isExclusive?: Boolean;
+  author?: UserCreateOneInput;
+  lastModifiedUser?: UserCreateOneInput;
+  gluonType?: GluonTypeCreateOneInput;
+}
+
 export interface QuarkTypeUpdateManyMutationInput {
   name?: String;
   imagePath?: String;
@@ -1065,11 +996,9 @@ export interface QuarkTypeUpdateManyMutationInput {
   sort2?: Int;
 }
 
-export interface GluonCreateManyWithoutPassiveQuarkInput {
-  create?:
-    | GluonCreateWithoutPassiveQuarkInput[]
-    | GluonCreateWithoutPassiveQuarkInput;
-  connect?: GluonWhereUniqueInput[] | GluonWhereUniqueInput;
+export interface GluonTypeCreateOneInput {
+  create?: GluonTypeCreateInput;
+  connect?: GluonTypeWhereUniqueInput;
 }
 
 export interface QuarkUpdateManyMutationInput {
@@ -1089,20 +1018,12 @@ export interface QuarkUpdateManyMutationInput {
   wid?: Int;
 }
 
-export interface GluonCreateWithoutPassiveQuarkInput {
-  activeQuark: QuarkCreateOneWithoutActivesInput;
-  relation: String;
-  suffix?: String;
-  start?: DateTimeInput;
-  end?: DateTimeInput;
-  startAccuracy?: String;
-  endAccuracy?: String;
-  isMomentary?: Boolean;
-  url?: String;
-  isPrivate?: Boolean;
-  isExclusive?: Boolean;
-  author?: UserCreateOneInput;
-  lastModifiedUser?: UserCreateOneInput;
+export interface GluonTypeCreateInput {
+  name: String;
+  caption: String;
+  captionJa: String;
+  sort1: Int;
+  sort2: Int;
 }
 
 export interface QuarkUpdateInput {
@@ -1193,6 +1114,7 @@ export interface GluonCreateWithoutActiveQuarkInput {
   isExclusive?: Boolean;
   author?: UserCreateOneInput;
   lastModifiedUser?: UserCreateOneInput;
+  gluonType?: GluonTypeCreateOneInput;
 }
 
 export type QuarkTypeWhereUniqueInput = AtLeastOne<{
@@ -1200,10 +1122,21 @@ export type QuarkTypeWhereUniqueInput = AtLeastOne<{
   name?: String;
 }>;
 
-export interface GluonUpsertWithWhereUniqueWithoutActiveQuarkInput {
-  where: GluonWhereUniqueInput;
-  update: GluonUpdateWithoutActiveQuarkDataInput;
-  create: GluonCreateWithoutActiveQuarkInput;
+export interface GluonUpdateWithoutActiveQuarkDataInput {
+  passiveQuark?: QuarkUpdateOneRequiredWithoutPassivesInput;
+  relation?: String;
+  suffix?: String;
+  start?: DateTimeInput;
+  end?: DateTimeInput;
+  startAccuracy?: String;
+  endAccuracy?: String;
+  isMomentary?: Boolean;
+  url?: String;
+  isPrivate?: Boolean;
+  isExclusive?: Boolean;
+  author?: UserUpdateOneInput;
+  lastModifiedUser?: UserUpdateOneInput;
+  gluonType?: GluonTypeUpdateOneInput;
 }
 
 export interface UserCreateOneWithoutPostsInput {
@@ -1264,17 +1197,9 @@ export interface UserUpdateOneInput {
   connect?: UserWhereUniqueInput;
 }
 
-export interface GluonUpdateManyMutationInput {
-  relation?: String;
-  suffix?: String;
-  start?: DateTimeInput;
-  end?: DateTimeInput;
-  startAccuracy?: String;
-  endAccuracy?: String;
-  isMomentary?: Boolean;
-  url?: String;
-  isPrivate?: Boolean;
-  isExclusive?: Boolean;
+export interface QuarkUpsertWithoutPassivesInput {
+  update: QuarkUpdateWithoutPassivesDataInput;
+  create: QuarkCreateWithoutPassivesInput;
 }
 
 export interface UserUpdateDataInput {
@@ -1283,6 +1208,48 @@ export interface UserUpdateDataInput {
   password?: String;
   role?: String;
   posts?: PostUpdateManyWithoutAuthorInput;
+}
+
+export interface QuarkCreateOneWithoutActivesInput {
+  create?: QuarkCreateWithoutActivesInput;
+  connect?: QuarkWhereUniqueInput;
+}
+
+export interface PostWhereInput {
+  id?: ID_Input;
+  id_not?: ID_Input;
+  id_in?: ID_Input[] | ID_Input;
+  id_not_in?: ID_Input[] | ID_Input;
+  id_lt?: ID_Input;
+  id_lte?: ID_Input;
+  id_gt?: ID_Input;
+  id_gte?: ID_Input;
+  id_contains?: ID_Input;
+  id_not_contains?: ID_Input;
+  id_starts_with?: ID_Input;
+  id_not_starts_with?: ID_Input;
+  id_ends_with?: ID_Input;
+  id_not_ends_with?: ID_Input;
+  title?: String;
+  title_not?: String;
+  title_in?: String[] | String;
+  title_not_in?: String[] | String;
+  title_lt?: String;
+  title_lte?: String;
+  title_gt?: String;
+  title_gte?: String;
+  title_contains?: String;
+  title_not_contains?: String;
+  title_starts_with?: String;
+  title_not_starts_with?: String;
+  title_ends_with?: String;
+  title_not_ends_with?: String;
+  published?: Boolean;
+  published_not?: Boolean;
+  author?: UserWhereInput;
+  AND?: PostWhereInput[] | PostWhereInput;
+  OR?: PostWhereInput[] | PostWhereInput;
+  NOT?: PostWhereInput[] | PostWhereInput;
 }
 
 export interface QuarkWhereInput {
@@ -1460,68 +1427,25 @@ export interface QuarkWhereInput {
   NOT?: QuarkWhereInput[] | QuarkWhereInput;
 }
 
-export interface PostWhereInput {
-  id?: ID_Input;
-  id_not?: ID_Input;
-  id_in?: ID_Input[] | ID_Input;
-  id_not_in?: ID_Input[] | ID_Input;
-  id_lt?: ID_Input;
-  id_lte?: ID_Input;
-  id_gt?: ID_Input;
-  id_gte?: ID_Input;
-  id_contains?: ID_Input;
-  id_not_contains?: ID_Input;
-  id_starts_with?: ID_Input;
-  id_not_starts_with?: ID_Input;
-  id_ends_with?: ID_Input;
-  id_not_ends_with?: ID_Input;
-  title?: String;
-  title_not?: String;
-  title_in?: String[] | String;
-  title_not_in?: String[] | String;
-  title_lt?: String;
-  title_lte?: String;
-  title_gt?: String;
-  title_gte?: String;
-  title_contains?: String;
-  title_not_contains?: String;
-  title_starts_with?: String;
-  title_not_starts_with?: String;
-  title_ends_with?: String;
-  title_not_ends_with?: String;
-  published?: Boolean;
-  published_not?: Boolean;
-  author?: UserWhereInput;
-  AND?: PostWhereInput[] | PostWhereInput;
-  OR?: PostWhereInput[] | PostWhereInput;
-  NOT?: PostWhereInput[] | PostWhereInput;
+export interface GluonUpdateWithWhereUniqueWithoutActiveQuarkInput {
+  where: GluonWhereUniqueInput;
+  data: GluonUpdateWithoutActiveQuarkDataInput;
 }
 
-export interface PostSubscriptionWhereInput {
+export interface QuarkSubscriptionWhereInput {
   mutation_in?: MutationType[] | MutationType;
   updatedFields_contains?: String;
   updatedFields_contains_every?: String[] | String;
   updatedFields_contains_some?: String[] | String;
-  node?: PostWhereInput;
-  AND?: PostSubscriptionWhereInput[] | PostSubscriptionWhereInput;
-  OR?: PostSubscriptionWhereInput[] | PostSubscriptionWhereInput;
-  NOT?: PostSubscriptionWhereInput[] | PostSubscriptionWhereInput;
+  node?: QuarkWhereInput;
+  AND?: QuarkSubscriptionWhereInput[] | QuarkSubscriptionWhereInput;
+  OR?: QuarkSubscriptionWhereInput[] | QuarkSubscriptionWhereInput;
+  NOT?: QuarkSubscriptionWhereInput[] | QuarkSubscriptionWhereInput;
 }
 
-export interface GluonUpdateWithoutActiveQuarkDataInput {
-  passiveQuark?: QuarkUpdateOneRequiredWithoutPassivesInput;
-  relation?: String;
-  suffix?: String;
-  start?: DateTimeInput;
-  end?: DateTimeInput;
-  startAccuracy?: String;
-  endAccuracy?: String;
-  isMomentary?: Boolean;
-  url?: String;
-  isPrivate?: Boolean;
-  isExclusive?: Boolean;
-  author?: UserUpdateOneInput;
-  lastModifiedUser?: UserUpdateOneInput;
+export interface PostUpdateWithoutAuthorDataInput {
+  title?: String;
+  published?: Boolean;
 }
 
 export interface UserUpdateManyMutationInput {
@@ -1531,9 +1455,10 @@ export interface UserUpdateManyMutationInput {
   role?: String;
 }
 
-export interface PostUpdateWithoutAuthorDataInput {
-  title?: String;
-  published?: Boolean;
+export interface PostUpsertWithWhereUniqueWithoutAuthorInput {
+  where: PostWhereUniqueInput;
+  update: PostUpdateWithoutAuthorDataInput;
+  create: PostCreateWithoutAuthorInput;
 }
 
 export interface QuarkTypeUpdateInput {
@@ -1547,10 +1472,9 @@ export interface QuarkTypeUpdateInput {
   sort2?: Int;
 }
 
-export interface PostUpsertWithWhereUniqueWithoutAuthorInput {
-  where: PostWhereUniqueInput;
-  update: PostUpdateWithoutAuthorDataInput;
-  create: PostCreateWithoutAuthorInput;
+export interface UserUpsertNestedInput {
+  update: UserUpdateDataInput;
+  create: UserCreateInput;
 }
 
 export interface QuarkCreateInput {
@@ -1575,18 +1499,6 @@ export interface QuarkCreateInput {
   passives?: GluonCreateManyWithoutPassiveQuarkInput;
 }
 
-export interface UserUpsertNestedInput {
-  update: UserUpdateDataInput;
-  create: UserCreateInput;
-}
-
-export interface UserUpdateWithoutPostsDataInput {
-  email?: String;
-  name?: String;
-  password?: String;
-  role?: String;
-}
-
 export interface QuarkTypeUpdateOneInput {
   create?: QuarkTypeCreateInput;
   update?: QuarkTypeUpdateDataInput;
@@ -1596,10 +1508,10 @@ export interface QuarkTypeUpdateOneInput {
   connect?: QuarkTypeWhereUniqueInput;
 }
 
-export interface UserCreateWithoutPostsInput {
+export interface UserUpdateWithoutPostsDataInput {
   email?: String;
-  name: String;
-  password: String;
+  name?: String;
+  password?: String;
   role?: String;
 }
 
@@ -1614,21 +1526,23 @@ export interface QuarkTypeUpdateDataInput {
   sort2?: Int;
 }
 
-export type UserWhereUniqueInput = AtLeastOne<{
-  id: ID_Input;
+export interface UserCreateWithoutPostsInput {
   email?: String;
-  name?: String;
-}>;
+  name: String;
+  password: String;
+  role?: String;
+}
 
 export interface QuarkTypeUpsertNestedInput {
   update: QuarkTypeUpdateDataInput;
   create: QuarkTypeCreateInput;
 }
 
-export interface QuarkUpsertWithoutPassivesInput {
-  update: QuarkUpdateWithoutPassivesDataInput;
-  create: QuarkCreateWithoutPassivesInput;
-}
+export type UserWhereUniqueInput = AtLeastOne<{
+  id: ID_Input;
+  email?: String;
+  name?: String;
+}>;
 
 export interface GluonUpdateManyWithoutPassiveQuarkInput {
   create?:
@@ -1645,15 +1559,10 @@ export interface GluonUpdateManyWithoutPassiveQuarkInput {
     | GluonUpsertWithWhereUniqueWithoutPassiveQuarkInput;
 }
 
-export interface QuarkTypeSubscriptionWhereInput {
-  mutation_in?: MutationType[] | MutationType;
-  updatedFields_contains?: String;
-  updatedFields_contains_every?: String[] | String;
-  updatedFields_contains_some?: String[] | String;
-  node?: QuarkTypeWhereInput;
-  AND?: QuarkTypeSubscriptionWhereInput[] | QuarkTypeSubscriptionWhereInput;
-  OR?: QuarkTypeSubscriptionWhereInput[] | QuarkTypeSubscriptionWhereInput;
-  NOT?: QuarkTypeSubscriptionWhereInput[] | QuarkTypeSubscriptionWhereInput;
+export interface GluonUpsertWithWhereUniqueWithoutActiveQuarkInput {
+  where: GluonWhereUniqueInput;
+  update: GluonUpdateWithoutActiveQuarkDataInput;
+  create: GluonCreateWithoutActiveQuarkInput;
 }
 
 export interface GluonUpdateWithWhereUniqueWithoutPassiveQuarkInput {
@@ -1661,12 +1570,15 @@ export interface GluonUpdateWithWhereUniqueWithoutPassiveQuarkInput {
   data: GluonUpdateWithoutPassiveQuarkDataInput;
 }
 
-export interface UserUpdateInput {
-  email?: String;
-  name?: String;
-  password?: String;
-  role?: String;
-  posts?: PostUpdateManyWithoutAuthorInput;
+export interface UserSubscriptionWhereInput {
+  mutation_in?: MutationType[] | MutationType;
+  updatedFields_contains?: String;
+  updatedFields_contains_every?: String[] | String;
+  updatedFields_contains_some?: String[] | String;
+  node?: UserWhereInput;
+  AND?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput;
+  OR?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput;
+  NOT?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput;
 }
 
 export interface GluonUpdateWithoutPassiveQuarkDataInput {
@@ -1683,38 +1595,63 @@ export interface GluonUpdateWithoutPassiveQuarkDataInput {
   isExclusive?: Boolean;
   author?: UserUpdateOneInput;
   lastModifiedUser?: UserUpdateOneInput;
+  gluonType?: GluonTypeUpdateOneInput;
 }
 
-export type QuarkWhereUniqueInput = AtLeastOne<{
+export interface GluonTypeSubscriptionWhereInput {
+  mutation_in?: MutationType[] | MutationType;
+  updatedFields_contains?: String;
+  updatedFields_contains_every?: String[] | String;
+  updatedFields_contains_some?: String[] | String;
+  node?: GluonTypeWhereInput;
+  AND?: GluonTypeSubscriptionWhereInput[] | GluonTypeSubscriptionWhereInput;
+  OR?: GluonTypeSubscriptionWhereInput[] | GluonTypeSubscriptionWhereInput;
+  NOT?: GluonTypeSubscriptionWhereInput[] | GluonTypeSubscriptionWhereInput;
+}
+
+export interface GluonTypeUpdateOneInput {
+  create?: GluonTypeCreateInput;
+  update?: GluonTypeUpdateDataInput;
+  upsert?: GluonTypeUpsertNestedInput;
+  delete?: Boolean;
+  disconnect?: Boolean;
+  connect?: GluonTypeWhereUniqueInput;
+}
+
+export type PostWhereUniqueInput = AtLeastOne<{
   id: ID_Input;
-  name?: String;
 }>;
 
-export interface GluonUpsertWithWhereUniqueWithoutPassiveQuarkInput {
-  where: GluonWhereUniqueInput;
-  update: GluonUpdateWithoutPassiveQuarkDataInput;
-  create: GluonCreateWithoutPassiveQuarkInput;
+export interface GluonTypeUpdateDataInput {
+  name?: String;
+  caption?: String;
+  captionJa?: String;
+  sort1?: Int;
+  sort2?: Int;
 }
 
-export interface PostCreateInput {
-  title: String;
+export interface PostUpdateInput {
+  title?: String;
   published?: Boolean;
-  author?: UserCreateOneWithoutPostsInput;
+  author?: UserUpdateOneWithoutPostsInput;
 }
 
-export interface GluonUpdateManyWithoutActiveQuarkInput {
-  create?:
-    | GluonCreateWithoutActiveQuarkInput[]
-    | GluonCreateWithoutActiveQuarkInput;
-  delete?: GluonWhereUniqueInput[] | GluonWhereUniqueInput;
-  connect?: GluonWhereUniqueInput[] | GluonWhereUniqueInput;
-  disconnect?: GluonWhereUniqueInput[] | GluonWhereUniqueInput;
-  update?:
-    | GluonUpdateWithWhereUniqueWithoutActiveQuarkInput[]
-    | GluonUpdateWithWhereUniqueWithoutActiveQuarkInput;
-  upsert?:
-    | GluonUpsertWithWhereUniqueWithoutActiveQuarkInput[]
-    | GluonUpsertWithWhereUniqueWithoutActiveQuarkInput;
+export interface GluonTypeUpsertNestedInput {
+  update: GluonTypeUpdateDataInput;
+  create: GluonTypeCreateInput;
+}
+
+export interface GluonUpdateManyMutationInput {
+  relation?: String;
+  suffix?: String;
+  start?: DateTimeInput;
+  end?: DateTimeInput;
+  startAccuracy?: String;
+  endAccuracy?: String;
+  isMomentary?: Boolean;
+  url?: String;
+  isPrivate?: Boolean;
+  isExclusive?: Boolean;
 }
 
 export interface QuarkUpdateWithoutPassivesDataInput {
@@ -1750,44 +1687,141 @@ export interface QuarkUpsertWithoutActivesInput {
   create: QuarkCreateWithoutActivesInput;
 }
 
-export interface GluonTypeCreateInput {
-  name: String;
-  caption: String;
-  captionJa: String;
-  sort1: Int;
-  sort2: Int;
+export interface GluonUpsertWithWhereUniqueWithoutPassiveQuarkInput {
+  where: GluonWhereUniqueInput;
+  update: GluonUpdateWithoutPassiveQuarkDataInput;
+  create: GluonCreateWithoutPassiveQuarkInput;
 }
 
-export interface PostUpdateInput {
-  title?: String;
+export interface GluonCreateInput {
+  activeQuark: QuarkCreateOneWithoutActivesInput;
+  passiveQuark: QuarkCreateOneWithoutPassivesInput;
+  relation: String;
+  suffix?: String;
+  start?: DateTimeInput;
+  end?: DateTimeInput;
+  startAccuracy?: String;
+  endAccuracy?: String;
+  isMomentary?: Boolean;
+  url?: String;
+  isPrivate?: Boolean;
+  isExclusive?: Boolean;
+  author?: UserCreateOneInput;
+  lastModifiedUser?: UserCreateOneInput;
+  gluonType?: GluonTypeCreateOneInput;
+}
+
+export interface PostCreateInput {
+  title: String;
   published?: Boolean;
-  author?: UserUpdateOneWithoutPostsInput;
+  author?: UserCreateOneWithoutPostsInput;
 }
 
-export type PostWhereUniqueInput = AtLeastOne<{
+export type QuarkWhereUniqueInput = AtLeastOne<{
   id: ID_Input;
+  name?: String;
 }>;
 
-export interface GluonSubscriptionWhereInput {
-  mutation_in?: MutationType[] | MutationType;
-  updatedFields_contains?: String;
-  updatedFields_contains_every?: String[] | String;
-  updatedFields_contains_some?: String[] | String;
-  node?: GluonWhereInput;
-  AND?: GluonSubscriptionWhereInput[] | GluonSubscriptionWhereInput;
-  OR?: GluonSubscriptionWhereInput[] | GluonSubscriptionWhereInput;
-  NOT?: GluonSubscriptionWhereInput[] | GluonSubscriptionWhereInput;
+export interface UserUpdateInput {
+  email?: String;
+  name?: String;
+  password?: String;
+  role?: String;
+  posts?: PostUpdateManyWithoutAuthorInput;
 }
 
-export interface UserSubscriptionWhereInput {
-  mutation_in?: MutationType[] | MutationType;
-  updatedFields_contains?: String;
-  updatedFields_contains_every?: String[] | String;
-  updatedFields_contains_some?: String[] | String;
-  node?: UserWhereInput;
-  AND?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput;
-  OR?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput;
-  NOT?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput;
+export interface GluonTypeWhereInput {
+  id?: ID_Input;
+  id_not?: ID_Input;
+  id_in?: ID_Input[] | ID_Input;
+  id_not_in?: ID_Input[] | ID_Input;
+  id_lt?: ID_Input;
+  id_lte?: ID_Input;
+  id_gt?: ID_Input;
+  id_gte?: ID_Input;
+  id_contains?: ID_Input;
+  id_not_contains?: ID_Input;
+  id_starts_with?: ID_Input;
+  id_not_starts_with?: ID_Input;
+  id_ends_with?: ID_Input;
+  id_not_ends_with?: ID_Input;
+  name?: String;
+  name_not?: String;
+  name_in?: String[] | String;
+  name_not_in?: String[] | String;
+  name_lt?: String;
+  name_lte?: String;
+  name_gt?: String;
+  name_gte?: String;
+  name_contains?: String;
+  name_not_contains?: String;
+  name_starts_with?: String;
+  name_not_starts_with?: String;
+  name_ends_with?: String;
+  name_not_ends_with?: String;
+  caption?: String;
+  caption_not?: String;
+  caption_in?: String[] | String;
+  caption_not_in?: String[] | String;
+  caption_lt?: String;
+  caption_lte?: String;
+  caption_gt?: String;
+  caption_gte?: String;
+  caption_contains?: String;
+  caption_not_contains?: String;
+  caption_starts_with?: String;
+  caption_not_starts_with?: String;
+  caption_ends_with?: String;
+  caption_not_ends_with?: String;
+  captionJa?: String;
+  captionJa_not?: String;
+  captionJa_in?: String[] | String;
+  captionJa_not_in?: String[] | String;
+  captionJa_lt?: String;
+  captionJa_lte?: String;
+  captionJa_gt?: String;
+  captionJa_gte?: String;
+  captionJa_contains?: String;
+  captionJa_not_contains?: String;
+  captionJa_starts_with?: String;
+  captionJa_not_starts_with?: String;
+  captionJa_ends_with?: String;
+  captionJa_not_ends_with?: String;
+  sort1?: Int;
+  sort1_not?: Int;
+  sort1_in?: Int[] | Int;
+  sort1_not_in?: Int[] | Int;
+  sort1_lt?: Int;
+  sort1_lte?: Int;
+  sort1_gt?: Int;
+  sort1_gte?: Int;
+  sort2?: Int;
+  sort2_not?: Int;
+  sort2_in?: Int[] | Int;
+  sort2_not_in?: Int[] | Int;
+  sort2_lt?: Int;
+  sort2_lte?: Int;
+  sort2_gt?: Int;
+  sort2_gte?: Int;
+  createdAt?: DateTimeInput;
+  createdAt_not?: DateTimeInput;
+  createdAt_in?: DateTimeInput[] | DateTimeInput;
+  createdAt_not_in?: DateTimeInput[] | DateTimeInput;
+  createdAt_lt?: DateTimeInput;
+  createdAt_lte?: DateTimeInput;
+  createdAt_gt?: DateTimeInput;
+  createdAt_gte?: DateTimeInput;
+  updatedAt?: DateTimeInput;
+  updatedAt_not?: DateTimeInput;
+  updatedAt_in?: DateTimeInput[] | DateTimeInput;
+  updatedAt_not_in?: DateTimeInput[] | DateTimeInput;
+  updatedAt_lt?: DateTimeInput;
+  updatedAt_lte?: DateTimeInput;
+  updatedAt_gt?: DateTimeInput;
+  updatedAt_gte?: DateTimeInput;
+  AND?: GluonTypeWhereInput[] | GluonTypeWhereInput;
+  OR?: GluonTypeWhereInput[] | GluonTypeWhereInput;
+  NOT?: GluonTypeWhereInput[] | GluonTypeWhereInput;
 }
 
 export interface NodeNode {
@@ -1995,62 +2029,36 @@ export interface UserEdgeSubscription
   cursor: () => Promise<AsyncIterator<String>>;
 }
 
-export interface UserSubscriptionPayload {
-  mutation: MutationType;
-  updatedFields?: String[];
+export interface BatchPayload {
+  count: Long;
 }
 
-export interface UserSubscriptionPayloadPromise
-  extends Promise<UserSubscriptionPayload>,
+export interface BatchPayloadPromise
+  extends Promise<BatchPayload>,
     Fragmentable {
-  mutation: () => Promise<MutationType>;
-  node: <T = UserPromise>() => T;
-  updatedFields: () => Promise<String[]>;
-  previousValues: <T = UserPreviousValuesPromise>() => T;
+  count: () => Promise<Long>;
 }
 
-export interface UserSubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<UserSubscriptionPayload>>,
+export interface BatchPayloadSubscription
+  extends Promise<AsyncIterator<BatchPayload>>,
     Fragmentable {
-  mutation: () => Promise<AsyncIterator<MutationType>>;
-  node: <T = UserSubscription>() => T;
-  updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <T = UserPreviousValuesSubscription>() => T;
+  count: () => Promise<AsyncIterator<Long>>;
 }
 
-export interface GluonType {
-  id: ID_Output;
-  name: String;
-  caption: String;
-  captionJa: String;
-  sort1: Int;
-  sort2: Int;
-  createdAt: DateTimeOutput;
-  updatedAt: DateTimeOutput;
+export interface AggregateGluon {
+  count: Int;
 }
 
-export interface GluonTypePromise extends Promise<GluonType>, Fragmentable {
-  id: () => Promise<ID_Output>;
-  name: () => Promise<String>;
-  caption: () => Promise<String>;
-  captionJa: () => Promise<String>;
-  sort1: () => Promise<Int>;
-  sort2: () => Promise<Int>;
-  createdAt: () => Promise<DateTimeOutput>;
-  updatedAt: () => Promise<DateTimeOutput>;
-}
-
-export interface GluonTypeSubscription
-  extends Promise<AsyncIterator<GluonType>>,
+export interface AggregateGluonPromise
+  extends Promise<AggregateGluon>,
     Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  name: () => Promise<AsyncIterator<String>>;
-  caption: () => Promise<AsyncIterator<String>>;
-  captionJa: () => Promise<AsyncIterator<String>>;
-  sort1: () => Promise<AsyncIterator<Int>>;
-  sort2: () => Promise<AsyncIterator<Int>>;
-  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  count: () => Promise<Int>;
+}
+
+export interface AggregateGluonSubscription
+  extends Promise<AsyncIterator<AggregateGluon>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
 }
 
 export interface Quark {
@@ -2165,20 +2173,20 @@ export interface QuarkSubscription
   ) => T;
 }
 
-export interface AggregateGluon {
-  count: Int;
+export interface GluonEdge {
+  cursor: String;
 }
 
-export interface AggregateGluonPromise
-  extends Promise<AggregateGluon>,
-    Fragmentable {
-  count: () => Promise<Int>;
+export interface GluonEdgePromise extends Promise<GluonEdge>, Fragmentable {
+  node: <T = GluonPromise>() => T;
+  cursor: () => Promise<String>;
 }
 
-export interface AggregateGluonSubscription
-  extends Promise<AsyncIterator<AggregateGluon>>,
+export interface GluonEdgeSubscription
+  extends Promise<AsyncIterator<GluonEdge>>,
     Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
+  node: <T = GluonSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
 }
 
 export interface QuarkTypeEdge {
@@ -2231,6 +2239,7 @@ export interface GluonPromise extends Promise<Gluon>, Fragmentable {
   isExclusive: () => Promise<Boolean>;
   author: <T = UserPromise>() => T;
   lastModifiedUser: <T = UserPromise>() => T;
+  gluonType: <T = GluonTypePromise>() => T;
   createdAt: () => Promise<DateTimeOutput>;
   updatedAt: () => Promise<DateTimeOutput>;
 }
@@ -2253,6 +2262,7 @@ export interface GluonSubscription
   isExclusive: () => Promise<AsyncIterator<Boolean>>;
   author: <T = UserSubscription>() => T;
   lastModifiedUser: <T = UserSubscription>() => T;
+  gluonType: <T = GluonTypeSubscription>() => T;
   createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
   updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
@@ -2438,20 +2448,27 @@ export interface QuarkTypePreviousValuesSubscription
   updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
 
-export interface GluonEdge {
-  cursor: String;
+export interface PageInfo {
+  hasNextPage: Boolean;
+  hasPreviousPage: Boolean;
+  startCursor?: String;
+  endCursor?: String;
 }
 
-export interface GluonEdgePromise extends Promise<GluonEdge>, Fragmentable {
-  node: <T = GluonPromise>() => T;
-  cursor: () => Promise<String>;
+export interface PageInfoPromise extends Promise<PageInfo>, Fragmentable {
+  hasNextPage: () => Promise<Boolean>;
+  hasPreviousPage: () => Promise<Boolean>;
+  startCursor: () => Promise<String>;
+  endCursor: () => Promise<String>;
 }
 
-export interface GluonEdgeSubscription
-  extends Promise<AsyncIterator<GluonEdge>>,
+export interface PageInfoSubscription
+  extends Promise<AsyncIterator<PageInfo>>,
     Fragmentable {
-  node: <T = GluonSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
+  hasNextPage: () => Promise<AsyncIterator<Boolean>>;
+  hasPreviousPage: () => Promise<AsyncIterator<Boolean>>;
+  startCursor: () => Promise<AsyncIterator<String>>;
+  endCursor: () => Promise<AsyncIterator<String>>;
 }
 
 export interface PostEdge {
@@ -2546,45 +2563,45 @@ export interface GluonTypePreviousValuesSubscription
   updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
 
-export interface UserConnection {}
+export interface UserSubscriptionPayload {
+  mutation: MutationType;
+  updatedFields?: String[];
+}
 
-export interface UserConnectionPromise
-  extends Promise<UserConnection>,
+export interface UserSubscriptionPayloadPromise
+  extends Promise<UserSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = UserPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = UserPreviousValuesPromise>() => T;
+}
+
+export interface UserSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<UserSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = UserSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = UserPreviousValuesSubscription>() => T;
+}
+
+export interface GluonConnection {}
+
+export interface GluonConnectionPromise
+  extends Promise<GluonConnection>,
     Fragmentable {
   pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<UserEdge>>() => T;
-  aggregate: <T = AggregateUserPromise>() => T;
+  edges: <T = FragmentableArray<GluonEdge>>() => T;
+  aggregate: <T = AggregateGluonPromise>() => T;
 }
 
-export interface UserConnectionSubscription
-  extends Promise<AsyncIterator<UserConnection>>,
+export interface GluonConnectionSubscription
+  extends Promise<AsyncIterator<GluonConnection>>,
     Fragmentable {
   pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<UserEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateUserSubscription>() => T;
-}
-
-export interface PageInfo {
-  hasNextPage: Boolean;
-  hasPreviousPage: Boolean;
-  startCursor?: String;
-  endCursor?: String;
-}
-
-export interface PageInfoPromise extends Promise<PageInfo>, Fragmentable {
-  hasNextPage: () => Promise<Boolean>;
-  hasPreviousPage: () => Promise<Boolean>;
-  startCursor: () => Promise<String>;
-  endCursor: () => Promise<String>;
-}
-
-export interface PageInfoSubscription
-  extends Promise<AsyncIterator<PageInfo>>,
-    Fragmentable {
-  hasNextPage: () => Promise<AsyncIterator<Boolean>>;
-  hasPreviousPage: () => Promise<AsyncIterator<Boolean>>;
-  startCursor: () => Promise<AsyncIterator<String>>;
-  endCursor: () => Promise<AsyncIterator<String>>;
+  edges: <T = Promise<AsyncIterator<GluonEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateGluonSubscription>() => T;
 }
 
 export interface QuarkTypeConnection {}
@@ -2751,22 +2768,39 @@ export interface QuarkSubscriptionPayloadSubscription
   previousValues: <T = QuarkPreviousValuesSubscription>() => T;
 }
 
-export interface GluonConnection {}
-
-export interface GluonConnectionPromise
-  extends Promise<GluonConnection>,
-    Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<GluonEdge>>() => T;
-  aggregate: <T = AggregateGluonPromise>() => T;
+export interface GluonType {
+  id: ID_Output;
+  name: String;
+  caption: String;
+  captionJa: String;
+  sort1: Int;
+  sort2: Int;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
 }
 
-export interface GluonConnectionSubscription
-  extends Promise<AsyncIterator<GluonConnection>>,
+export interface GluonTypePromise extends Promise<GluonType>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  name: () => Promise<String>;
+  caption: () => Promise<String>;
+  captionJa: () => Promise<String>;
+  sort1: () => Promise<Int>;
+  sort2: () => Promise<Int>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+}
+
+export interface GluonTypeSubscription
+  extends Promise<AsyncIterator<GluonType>>,
     Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<GluonEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateGluonSubscription>() => T;
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  name: () => Promise<AsyncIterator<String>>;
+  caption: () => Promise<AsyncIterator<String>>;
+  captionJa: () => Promise<AsyncIterator<String>>;
+  sort1: () => Promise<AsyncIterator<Int>>;
+  sort2: () => Promise<AsyncIterator<Int>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
 
 export interface PostPreviousValues {
@@ -2791,20 +2825,22 @@ export interface PostPreviousValuesSubscription
   published: () => Promise<AsyncIterator<Boolean>>;
 }
 
-export interface BatchPayload {
-  count: Long;
+export interface UserConnection {}
+
+export interface UserConnectionPromise
+  extends Promise<UserConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<UserEdge>>() => T;
+  aggregate: <T = AggregateUserPromise>() => T;
 }
 
-export interface BatchPayloadPromise
-  extends Promise<BatchPayload>,
+export interface UserConnectionSubscription
+  extends Promise<AsyncIterator<UserConnection>>,
     Fragmentable {
-  count: () => Promise<Long>;
-}
-
-export interface BatchPayloadSubscription
-  extends Promise<AsyncIterator<BatchPayload>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Long>>;
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<UserEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateUserSubscription>() => T;
 }
 
 export interface AggregatePost {

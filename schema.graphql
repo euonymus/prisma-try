@@ -29,8 +29,23 @@ type Mutation {
 	isExclusive: Boolean,
 	userId: ID
 	): Quark
-  createGluon(activeId: ID!, passiveId: ID!, relation: String!): Gluon
   deleteQuark(quarkId: ID!): Quark
+  createGluon(activeId: ID!, passiveId: ID!, relation: String!): Gluon
+  updateGluon(
+	gluonId: ID!,
+  	relation: String,
+	suffix: String,
+	start: DateTime,
+	end: DateTime,
+	startAccuracy: String,
+	endAccuracy: String,
+	isMomentary: Boolean,
+	url: String,
+	gluonTypeId: ID
+	isPrivate: Boolean,
+	isExclusive: Boolean,
+	userId: ID
+	): Gluon
   deleteGluon(gluonId: ID!): Gluon
 
   createQuarkType(
@@ -98,6 +113,7 @@ type Gluon {
   isExclusive: Boolean
   author: User
   lastModifiedUser: User
+  gluonType: GluonType
   createdAt: DateTime!
   updatedAt: DateTime!
 }
