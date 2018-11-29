@@ -3,6 +3,15 @@ const { GraphQLServer } = require('graphql-yoga')
 
 const resolvers = {
   Query: {
+    quarks(root, args, context) {
+      return context.prisma.quarks()
+    },
+    gluons(root, args, context) {
+      return context.prisma.gluons()
+    },
+    users(root, args, context) {
+      return context.prisma.users()
+    },
     publishedPosts(root, args, context) {
       return context.prisma.posts({ where: { published: true } })
     },
@@ -16,6 +25,53 @@ const resolvers = {
     }
   },
   Mutation: {
+    createQuark(root, args, context) {
+      return context.prisma.createQuark(
+        { name: args.name, description: args.description },
+      )
+    },
+    deleteQuark(root, args, context) {
+      return context.prisma.deleteQuark(
+        {
+          id: args.quarkId
+        }
+      )
+    },
+    createGluon(root, args, context) {
+      console.log(args.activeId)
+      console.log(args.passiveId)
+      return context.prisma.createGluon (
+        {
+          relation: args.relation,
+          activeQuark: {
+            connect: { id: args.activeId }
+          },
+          passiveQuark: {
+            connect: { id: args.passiveId }
+          }
+        },
+      )
+    },
+    deleteGluon(root, args, context) {
+      return context.prisma.deleteGluon(
+        {
+          id: args.gluonId
+        }
+      )
+    },
+
+    createUser(root, args, context) {
+      return context.prisma.createUser(
+        { name: args.name, password: args.password },
+      )
+    },
+    deleteUser(root, args, context) {
+      return context.prisma.deleteUser(
+        {
+          id: args.userId
+        }
+      )
+    },
     createDraft(root, args, context) {
       return context.prisma.createPost(
         {
@@ -33,11 +89,6 @@ const resolvers = {
           data: { published: true },
         },
       )
-    },
-    createUser(root, args, context) {
-      return context.prisma.createUser(
-        { name: args.name },
-      )
     }
   },
   User: {
@@ -52,6 +103,30 @@ const resolvers = {
       return context.prisma.post({
         id: root.id
       }).author()
+    }
+  },
+  Quark: {
+    actives(root, args, context) {
+      return context.prisma.quark({
+        id: root.id
+      }).actives()
+    },
+    passives(root, args, context) {
+      return context.prisma.quark({
+        id: root.id
+      }).passives()
+    }
+  },
+  Gluon: {
+    activeQuark(root, args, context) {
+      return context.prisma.gluon({
+        id: root.id
+      }).activeQuark()
+    },
+    passiveQuark(root, args, context) {
+      return context.prisma.gluon({
+        id: root.id
+      }).passiveQuark()
     }
   }
 }

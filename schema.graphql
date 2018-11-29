@@ -1,11 +1,21 @@
+scalar DateTime
+
 type Query {
+  quarks: [Quark!]!
+  gluons: [Gluon!]!
+  users: [User!]!
   publishedPosts: [Post!]!
   post(postId: ID!): Post
   postsByUser(userId: ID!): [Post!]!
 }
 
 type Mutation {
-  createUser(name: String!): User
+  createQuark(name: String!, description: String!): Quark
+  createGluon(activeId: ID!, passiveId: ID!, relation: String!): Gluon
+  deleteQuark(quarkId: ID!): Quark
+  deleteGluon(gluonId: ID!): Gluon
+  createUser(name: String!, password: String!): User
+  deleteUser(userId: ID!): User
   createDraft(title: String!, userId: ID!): Post
   publish(postId: ID!): Post
 }
@@ -14,8 +24,52 @@ type User {
   id: ID!
   email: String
   name: String!
+  password: String!
+  role: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
   posts: [Post!]!
 }
+
+type Quark {
+  id: ID!
+  name: String!
+  description: String
+  start: DateTime
+  end: DateTime
+  startAccuracy: String
+  endAccuracy: String
+  isMomentary: Boolean
+  url: String
+  isPrivate: Boolean
+  isExclusive: Boolean
+  userId: User
+  lastModifiedUser: User
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  actives: [Gluon!]!
+  passives: [Gluon!]!
+}
+
+type Gluon {
+  id: ID!
+  activeQuark: Quark!
+  passiveQuark: Quark!
+  relation: String!
+  start: DateTime
+  end: DateTime
+  startAccuracy: String
+  endAccuracy: String
+  isMomentary: Boolean
+  url: String
+  isPrivate: Boolean
+  isExclusive: Boolean
+  userId: User
+  lastModifiedUser: User
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
 
 type Post {
   id: ID!

@@ -1,7 +1,11 @@
 type User {
   id: ID! @unique
   email: String @unique
-  name: String!
+  name: String! @unique
+  password: String!
+  role: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
   posts: [Post!]!
 }
 
@@ -10,4 +14,43 @@ type Post {
   title: String!
   published: Boolean! @default(value: "false")
   author: User
+}
+
+type Quark {
+  id: ID! @unique
+  name: String! @unique
+  description: String
+  start: DateTime
+  end: DateTime
+  startAccuracy: String
+  endAccuracy: String
+  isMomentary: Boolean @default(value: "false")
+  url: String
+  isPrivate: Boolean @default(value: "false")
+  isExclusive: Boolean @default(value: "false")
+  userId: User @relation(name: "QuarkUser")
+  lastModifiedUser: User @relation(name: "QuarkLastModifiedUser")
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  actives: [Gluon!]! @relation(name: "Actives")
+  passives: [Gluon!]! @relation(name: "Passives")
+}
+
+type Gluon {
+  id: ID! @unique
+  activeQuark: Quark! @relation(name: "Actives")
+  passiveQuark: Quark! @relation(name: "Passives")
+  relation: String!
+  start: DateTime
+  end: DateTime
+  startAccuracy: String
+  endAccuracy: String
+  isMomentary: Boolean @default(value: "false")
+  url: String
+  isPrivate: Boolean @default(value: "false")
+  isExclusive: Boolean @default(value: "false")
+  userId: User @relation(name: "GluonUser")
+  lastModifiedUser: User @relation(name: "GluonLastModifiedUser")
+  createdAt: DateTime!
+  updatedAt: DateTime!
 }
