@@ -12,6 +12,9 @@ const resolvers = {
     gluons(root, args, context) {
       return context.prisma.gluons()
     },
+    quarkTypes(root, args, context) {
+      return context.prisma.quarkTypes()
+    },
     users(root, args, context) {
       return context.prisma.users()
     },
@@ -28,6 +31,20 @@ const resolvers = {
     }
   },
   Mutation: {
+    createQuarkType(root, args, context) {
+      return context.prisma.createQuarkType(
+        { name: args.name,
+          imagePath: args.imagePath,
+          nameProp: args.nameProp,
+          startProp: args.startProp,
+          endProp: args.endProp,
+          hasGender: args.hasGender,
+          sort1: args.sort1,
+          sort2: args.sort2,
+        },
+      )
+    },
+
     createQuark(root, args, context) {
       return context.prisma.createQuark(
         { name: args.name, description: args.description },

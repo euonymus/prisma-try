@@ -1,61 +1,162 @@
 # mutation {
+#   createQuarkType(
+#     name: "Person",
+#     imagePath: "/img/person.png",
+#     nameProp: "name",
+#     startProp: "birthDate",
+#     endProp: "deathDate",
+#     hasGender: true,
+#     sort1: 2,
+#     sort2: 2
+#   ) {
+#     id
+#     name
+#   }
+# }
+
+query {
+  quarkTypes {
+    id
+    name
+  }
+}
+
+# mutation {
 #   createQuark(name: "euonymus", description: "architect") {
 #     id
 #     description
 #   }
 # }
 
-query {
-  quark(name: "euonymus") {
-    id
-    name
-    actives {
-      relation
-      activeQuark {
-        name
-        actives {
-          relation
-          activeQuark {
-            name
-          }
-          passiveQuark {
-            name
-          }
-        }
-        passives {
-          relation
-          activeQuark {
-            name
-          }
-          passiveQuark {
-            name
-          }
-        }
-      }
-      passiveQuark {
-        name
-        actives {
-          relation
-          activeQuark {
-            name
-          }
-          passiveQuark {
-            name
-          }
-        }
-        passives {
-          relation
-          activeQuark {
-            name
-          }
-          passiveQuark {
-            name
-          }
-        }
-      }
-    }
-  }
-}
+
+# mutation {
+#   updateQuark(quarkId: "cjp28z92n00eo0a86qz6cv7f4",
+#               name: "euonymus",
+#     					userId: "cjp24p6vi007e0a8686778iqx"
+#   ) {
+#     id
+#     name
+#     author {
+#       name
+#     }
+#     lastModifiedUser {
+#       name
+#     }
+#   }
+# }
+
+
+
+# query {
+#   quark(name: "pepepe") {
+#     id
+#     name
+#   }
+# }
+
+
+# query {
+#   quark(name: "gluons") {
+#     id
+#     name
+#     actives {
+#       relation
+#       activeQuark {
+#         name
+#         actives {
+#           relation
+#           activeQuark {
+#             name
+#           }
+#           passiveQuark {
+#             name
+#           }
+#         }
+#         passives {
+#           relation
+#           activeQuark {
+#             name
+#           }
+#           passiveQuark {
+#             name
+#           }
+#         }
+#       }
+#       passiveQuark {
+#         name
+#         actives {
+#           relation
+#           activeQuark {
+#             name
+#           }
+#           passiveQuark {
+#             name
+#           }
+#         }
+#         passives {
+#           relation
+#           activeQuark {
+#             name
+#           }
+#           passiveQuark {
+#             name
+#           }
+#         }
+#       }
+#     }
+#     passives {
+#       relation
+#       activeQuark {
+#         name
+#         actives {
+#           relation
+#           activeQuark {
+#             name
+#           }
+#           passiveQuark {
+#             name
+#           }
+#         }
+#         passives {
+#           relation
+#           activeQuark {
+#             name
+#           }
+#           passiveQuark {
+#             name
+#           }
+#         }
+#       }
+#       passiveQuark {
+#         name
+#         actives {
+#           relation
+#           activeQuark {
+#             name
+#           }
+#           passiveQuark {
+#             name
+#           }
+#         }
+#         passives {
+#           relation
+#           activeQuark {
+#             name
+#           }
+#           passiveQuark {
+#             name
+#           }
+#         }
+#       }
+#     }
+#     author {
+#       name
+#     }
+#     lastModifiedUser {
+#       name
+#     }
+#   }
+# }
 
 # query {
 #  	quarks {
@@ -91,7 +192,6 @@ query {
 #     updatedAt
 # 	}
 # }
-
 
 # mutation {
 #   createGluon(activeId: "cjp28z92n00eo0a86qz6cv7f4", passiveId: "cjp28yx7600el0a86kb3bsrl6", relation: "is the architect of") {
@@ -169,3 +269,4 @@ query {
 #     title
 #   }
 # }
+

@@ -11,6 +11,10 @@ type AggregateQuark {
   count: Int!
 }
 
+type AggregateQuarkType {
+  count: Int!
+}
+
 type AggregateUser {
   count: Int!
 }
@@ -408,6 +412,12 @@ type Mutation {
   upsertQuark(where: QuarkWhereUniqueInput!, create: QuarkCreateInput!, update: QuarkUpdateInput!): Quark!
   deleteQuark(where: QuarkWhereUniqueInput!): Quark
   deleteManyQuarks(where: QuarkWhereInput): BatchPayload!
+  createQuarkType(data: QuarkTypeCreateInput!): QuarkType!
+  updateQuarkType(data: QuarkTypeUpdateInput!, where: QuarkTypeWhereUniqueInput!): QuarkType
+  updateManyQuarkTypes(data: QuarkTypeUpdateManyMutationInput!, where: QuarkTypeWhereInput): BatchPayload!
+  upsertQuarkType(where: QuarkTypeWhereUniqueInput!, create: QuarkTypeCreateInput!, update: QuarkTypeUpdateInput!): QuarkType!
+  deleteQuarkType(where: QuarkTypeWhereUniqueInput!): QuarkType
+  deleteManyQuarkTypes(where: QuarkTypeWhereInput): BatchPayload!
   createUser(data: UserCreateInput!): User!
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
   updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
@@ -734,6 +744,250 @@ input QuarkSubscriptionWhereInput {
   NOT: [QuarkSubscriptionWhereInput!]
 }
 
+type QuarkType {
+  id: ID!
+  name: String!
+  imagePath: String!
+  nameProp: String!
+  startProp: String!
+  endProp: String!
+  hasGender: Boolean
+  sort1: Int!
+  sort2: Int!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type QuarkTypeConnection {
+  pageInfo: PageInfo!
+  edges: [QuarkTypeEdge]!
+  aggregate: AggregateQuarkType!
+}
+
+input QuarkTypeCreateInput {
+  name: String!
+  imagePath: String!
+  nameProp: String!
+  startProp: String!
+  endProp: String!
+  hasGender: Boolean
+  sort1: Int!
+  sort2: Int!
+}
+
+type QuarkTypeEdge {
+  node: QuarkType!
+  cursor: String!
+}
+
+enum QuarkTypeOrderByInput {
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  imagePath_ASC
+  imagePath_DESC
+  nameProp_ASC
+  nameProp_DESC
+  startProp_ASC
+  startProp_DESC
+  endProp_ASC
+  endProp_DESC
+  hasGender_ASC
+  hasGender_DESC
+  sort1_ASC
+  sort1_DESC
+  sort2_ASC
+  sort2_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+type QuarkTypePreviousValues {
+  id: ID!
+  name: String!
+  imagePath: String!
+  nameProp: String!
+  startProp: String!
+  endProp: String!
+  hasGender: Boolean
+  sort1: Int!
+  sort2: Int!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type QuarkTypeSubscriptionPayload {
+  mutation: MutationType!
+  node: QuarkType
+  updatedFields: [String!]
+  previousValues: QuarkTypePreviousValues
+}
+
+input QuarkTypeSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: QuarkTypeWhereInput
+  AND: [QuarkTypeSubscriptionWhereInput!]
+  OR: [QuarkTypeSubscriptionWhereInput!]
+  NOT: [QuarkTypeSubscriptionWhereInput!]
+}
+
+input QuarkTypeUpdateInput {
+  name: String
+  imagePath: String
+  nameProp: String
+  startProp: String
+  endProp: String
+  hasGender: Boolean
+  sort1: Int
+  sort2: Int
+}
+
+input QuarkTypeUpdateManyMutationInput {
+  name: String
+  imagePath: String
+  nameProp: String
+  startProp: String
+  endProp: String
+  hasGender: Boolean
+  sort1: Int
+  sort2: Int
+}
+
+input QuarkTypeWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  name: String
+  name_not: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_gt: String
+  name_gte: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  imagePath: String
+  imagePath_not: String
+  imagePath_in: [String!]
+  imagePath_not_in: [String!]
+  imagePath_lt: String
+  imagePath_lte: String
+  imagePath_gt: String
+  imagePath_gte: String
+  imagePath_contains: String
+  imagePath_not_contains: String
+  imagePath_starts_with: String
+  imagePath_not_starts_with: String
+  imagePath_ends_with: String
+  imagePath_not_ends_with: String
+  nameProp: String
+  nameProp_not: String
+  nameProp_in: [String!]
+  nameProp_not_in: [String!]
+  nameProp_lt: String
+  nameProp_lte: String
+  nameProp_gt: String
+  nameProp_gte: String
+  nameProp_contains: String
+  nameProp_not_contains: String
+  nameProp_starts_with: String
+  nameProp_not_starts_with: String
+  nameProp_ends_with: String
+  nameProp_not_ends_with: String
+  startProp: String
+  startProp_not: String
+  startProp_in: [String!]
+  startProp_not_in: [String!]
+  startProp_lt: String
+  startProp_lte: String
+  startProp_gt: String
+  startProp_gte: String
+  startProp_contains: String
+  startProp_not_contains: String
+  startProp_starts_with: String
+  startProp_not_starts_with: String
+  startProp_ends_with: String
+  startProp_not_ends_with: String
+  endProp: String
+  endProp_not: String
+  endProp_in: [String!]
+  endProp_not_in: [String!]
+  endProp_lt: String
+  endProp_lte: String
+  endProp_gt: String
+  endProp_gte: String
+  endProp_contains: String
+  endProp_not_contains: String
+  endProp_starts_with: String
+  endProp_not_starts_with: String
+  endProp_ends_with: String
+  endProp_not_ends_with: String
+  hasGender: Boolean
+  hasGender_not: Boolean
+  sort1: Int
+  sort1_not: Int
+  sort1_in: [Int!]
+  sort1_not_in: [Int!]
+  sort1_lt: Int
+  sort1_lte: Int
+  sort1_gt: Int
+  sort1_gte: Int
+  sort2: Int
+  sort2_not: Int
+  sort2_in: [Int!]
+  sort2_not_in: [Int!]
+  sort2_lt: Int
+  sort2_lte: Int
+  sort2_gt: Int
+  sort2_gte: Int
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  AND: [QuarkTypeWhereInput!]
+  OR: [QuarkTypeWhereInput!]
+  NOT: [QuarkTypeWhereInput!]
+}
+
+input QuarkTypeWhereUniqueInput {
+  id: ID
+  name: String
+}
+
 input QuarkUpdateInput {
   name: String
   description: String
@@ -971,6 +1225,9 @@ type Query {
   quark(where: QuarkWhereUniqueInput!): Quark
   quarks(where: QuarkWhereInput, orderBy: QuarkOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Quark]!
   quarksConnection(where: QuarkWhereInput, orderBy: QuarkOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): QuarkConnection!
+  quarkType(where: QuarkTypeWhereUniqueInput!): QuarkType
+  quarkTypes(where: QuarkTypeWhereInput, orderBy: QuarkTypeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [QuarkType]!
+  quarkTypesConnection(where: QuarkTypeWhereInput, orderBy: QuarkTypeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): QuarkTypeConnection!
   user(where: UserWhereUniqueInput!): User
   users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
   usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
@@ -981,6 +1238,7 @@ type Subscription {
   gluon(where: GluonSubscriptionWhereInput): GluonSubscriptionPayload
   post(where: PostSubscriptionWhereInput): PostSubscriptionPayload
   quark(where: QuarkSubscriptionWhereInput): QuarkSubscriptionPayload
+  quarkType(where: QuarkTypeSubscriptionWhereInput): QuarkTypeSubscriptionPayload
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
 }
 

@@ -54,3 +54,17 @@ type Gluon {
   createdAt: DateTime!
   updatedAt: DateTime!
 }
+
+type QuarkType {
+  id: ID! @unique
+  name: String! @unique
+  imagePath: String!
+  nameProp: String!
+  startProp: String!
+  endProp: String!
+  hasGender: Boolean @default(value: "false")
+  sort1: Int!
+  sort2: Int!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}

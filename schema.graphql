@@ -4,6 +4,7 @@ type Query {
   quark(name: String!): Quark
   quarks: [Quark!]!
   gluons: [Gluon!]!
+  quarkTypes: [QuarkType!]!
   users: [User!]!
   publishedPosts: [Post!]!
   post(postId: ID!): Post
@@ -12,22 +13,35 @@ type Query {
 
 type Mutation {
   createQuark(name: String!, description: String!): Quark
-  updateQuark(quarkId: ID!,
-  	      name: String,
-	      description: String,
-	      start: DateTime,
-	      end: DateTime,
-	      startAccuracy: String,
-	      endAccuracy: String,
-	      isMomentary: Boolean,
-	      url: String,
-	      isPrivate: Boolean,
-	      isExclusive: Boolean,
-	      userId: ID
-	      ): Quark
+  updateQuark(
+	quarkId: ID!,
+  	name: String,
+	description: String,
+	start: DateTime,
+	end: DateTime,
+	startAccuracy: String,
+	endAccuracy: String,
+	isMomentary: Boolean,
+	url: String,
+	isPrivate: Boolean,
+	isExclusive: Boolean,
+	userId: ID
+	): Quark
   createGluon(activeId: ID!, passiveId: ID!, relation: String!): Gluon
   deleteQuark(quarkId: ID!): Quark
   deleteGluon(gluonId: ID!): Gluon
+
+  createQuarkType(
+        name: String,
+	imagePath: String,
+	nameProp: DateTime,
+	startProp: DateTime,
+	endProp: String,
+	hasGender: Boolean,
+	sort1: Int,
+	sort2: Int
+	): QuarkType
+
   createUser(name: String!, password: String!): User
   deleteUser(userId: ID!): User
   createDraft(title: String!, userId: ID!): Post
@@ -73,6 +87,18 @@ type Gluon {
   updatedAt: DateTime!
 }
 
+type QuarkType {
+  id: ID!
+  name: String!
+  imagePath: String!
+  nameProp: String!
+  startProp: String!
+  endProp: String!
+  hasGender: Boolean
+  sort: Int!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
 
 type User {
   id: ID!
