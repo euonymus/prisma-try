@@ -3,6 +3,10 @@ module.exports = {
   count: Int!
 }
 
+type AggregateGluonType {
+  count: Int!
+}
+
 type AggregatePost {
   count: Int!
 }
@@ -30,6 +34,7 @@ type Gluon {
   activeQuark: Quark!
   passiveQuark: Quark!
   relation: String!
+  suffix: String
   start: DateTime
   end: DateTime
   startAccuracy: String
@@ -54,6 +59,7 @@ input GluonCreateInput {
   activeQuark: QuarkCreateOneWithoutActivesInput!
   passiveQuark: QuarkCreateOneWithoutPassivesInput!
   relation: String!
+  suffix: String
   start: DateTime
   end: DateTime
   startAccuracy: String
@@ -79,6 +85,7 @@ input GluonCreateManyWithoutPassiveQuarkInput {
 input GluonCreateWithoutActiveQuarkInput {
   passiveQuark: QuarkCreateOneWithoutPassivesInput!
   relation: String!
+  suffix: String
   start: DateTime
   end: DateTime
   startAccuracy: String
@@ -94,6 +101,7 @@ input GluonCreateWithoutActiveQuarkInput {
 input GluonCreateWithoutPassiveQuarkInput {
   activeQuark: QuarkCreateOneWithoutActivesInput!
   relation: String!
+  suffix: String
   start: DateTime
   end: DateTime
   startAccuracy: String
@@ -116,6 +124,8 @@ enum GluonOrderByInput {
   id_DESC
   relation_ASC
   relation_DESC
+  suffix_ASC
+  suffix_DESC
   start_ASC
   start_DESC
   end_ASC
@@ -141,6 +151,7 @@ enum GluonOrderByInput {
 type GluonPreviousValues {
   id: ID!
   relation: String!
+  suffix: String
   start: DateTime
   end: DateTime
   startAccuracy: String
@@ -171,10 +182,204 @@ input GluonSubscriptionWhereInput {
   NOT: [GluonSubscriptionWhereInput!]
 }
 
+type GluonType {
+  id: ID!
+  name: String!
+  caption: String!
+  captionJa: String!
+  sort1: Int!
+  sort2: Int!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type GluonTypeConnection {
+  pageInfo: PageInfo!
+  edges: [GluonTypeEdge]!
+  aggregate: AggregateGluonType!
+}
+
+input GluonTypeCreateInput {
+  name: String!
+  caption: String!
+  captionJa: String!
+  sort1: Int!
+  sort2: Int!
+}
+
+type GluonTypeEdge {
+  node: GluonType!
+  cursor: String!
+}
+
+enum GluonTypeOrderByInput {
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  caption_ASC
+  caption_DESC
+  captionJa_ASC
+  captionJa_DESC
+  sort1_ASC
+  sort1_DESC
+  sort2_ASC
+  sort2_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+type GluonTypePreviousValues {
+  id: ID!
+  name: String!
+  caption: String!
+  captionJa: String!
+  sort1: Int!
+  sort2: Int!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type GluonTypeSubscriptionPayload {
+  mutation: MutationType!
+  node: GluonType
+  updatedFields: [String!]
+  previousValues: GluonTypePreviousValues
+}
+
+input GluonTypeSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: GluonTypeWhereInput
+  AND: [GluonTypeSubscriptionWhereInput!]
+  OR: [GluonTypeSubscriptionWhereInput!]
+  NOT: [GluonTypeSubscriptionWhereInput!]
+}
+
+input GluonTypeUpdateInput {
+  name: String
+  caption: String
+  captionJa: String
+  sort1: Int
+  sort2: Int
+}
+
+input GluonTypeUpdateManyMutationInput {
+  name: String
+  caption: String
+  captionJa: String
+  sort1: Int
+  sort2: Int
+}
+
+input GluonTypeWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  name: String
+  name_not: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_gt: String
+  name_gte: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  caption: String
+  caption_not: String
+  caption_in: [String!]
+  caption_not_in: [String!]
+  caption_lt: String
+  caption_lte: String
+  caption_gt: String
+  caption_gte: String
+  caption_contains: String
+  caption_not_contains: String
+  caption_starts_with: String
+  caption_not_starts_with: String
+  caption_ends_with: String
+  caption_not_ends_with: String
+  captionJa: String
+  captionJa_not: String
+  captionJa_in: [String!]
+  captionJa_not_in: [String!]
+  captionJa_lt: String
+  captionJa_lte: String
+  captionJa_gt: String
+  captionJa_gte: String
+  captionJa_contains: String
+  captionJa_not_contains: String
+  captionJa_starts_with: String
+  captionJa_not_starts_with: String
+  captionJa_ends_with: String
+  captionJa_not_ends_with: String
+  sort1: Int
+  sort1_not: Int
+  sort1_in: [Int!]
+  sort1_not_in: [Int!]
+  sort1_lt: Int
+  sort1_lte: Int
+  sort1_gt: Int
+  sort1_gte: Int
+  sort2: Int
+  sort2_not: Int
+  sort2_in: [Int!]
+  sort2_not_in: [Int!]
+  sort2_lt: Int
+  sort2_lte: Int
+  sort2_gt: Int
+  sort2_gte: Int
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  AND: [GluonTypeWhereInput!]
+  OR: [GluonTypeWhereInput!]
+  NOT: [GluonTypeWhereInput!]
+}
+
+input GluonTypeWhereUniqueInput {
+  id: ID
+  name: String
+}
+
 input GluonUpdateInput {
   activeQuark: QuarkUpdateOneRequiredWithoutActivesInput
   passiveQuark: QuarkUpdateOneRequiredWithoutPassivesInput
   relation: String
+  suffix: String
   start: DateTime
   end: DateTime
   startAccuracy: String
@@ -189,6 +394,7 @@ input GluonUpdateInput {
 
 input GluonUpdateManyMutationInput {
   relation: String
+  suffix: String
   start: DateTime
   end: DateTime
   startAccuracy: String
@@ -220,6 +426,7 @@ input GluonUpdateManyWithoutPassiveQuarkInput {
 input GluonUpdateWithoutActiveQuarkDataInput {
   passiveQuark: QuarkUpdateOneRequiredWithoutPassivesInput
   relation: String
+  suffix: String
   start: DateTime
   end: DateTime
   startAccuracy: String
@@ -235,6 +442,7 @@ input GluonUpdateWithoutActiveQuarkDataInput {
 input GluonUpdateWithoutPassiveQuarkDataInput {
   activeQuark: QuarkUpdateOneRequiredWithoutActivesInput
   relation: String
+  suffix: String
   start: DateTime
   end: DateTime
   startAccuracy: String
@@ -300,6 +508,20 @@ input GluonWhereInput {
   relation_not_starts_with: String
   relation_ends_with: String
   relation_not_ends_with: String
+  suffix: String
+  suffix_not: String
+  suffix_in: [String!]
+  suffix_not_in: [String!]
+  suffix_lt: String
+  suffix_lte: String
+  suffix_gt: String
+  suffix_gte: String
+  suffix_contains: String
+  suffix_not_contains: String
+  suffix_starts_with: String
+  suffix_not_starts_with: String
+  suffix_ends_with: String
+  suffix_not_ends_with: String
   start: DateTime
   start_not: DateTime
   start_in: [DateTime!]
@@ -400,6 +622,12 @@ type Mutation {
   upsertGluon(where: GluonWhereUniqueInput!, create: GluonCreateInput!, update: GluonUpdateInput!): Gluon!
   deleteGluon(where: GluonWhereUniqueInput!): Gluon
   deleteManyGluons(where: GluonWhereInput): BatchPayload!
+  createGluonType(data: GluonTypeCreateInput!): GluonType!
+  updateGluonType(data: GluonTypeUpdateInput!, where: GluonTypeWhereUniqueInput!): GluonType
+  updateManyGluonTypes(data: GluonTypeUpdateManyMutationInput!, where: GluonTypeWhereInput): BatchPayload!
+  upsertGluonType(where: GluonTypeWhereUniqueInput!, create: GluonTypeCreateInput!, update: GluonTypeUpdateInput!): GluonType!
+  deleteGluonType(where: GluonTypeWhereUniqueInput!): GluonType
+  deleteManyGluonTypes(where: GluonTypeWhereInput): BatchPayload!
   createPost(data: PostCreateInput!): Post!
   updatePost(data: PostUpdateInput!, where: PostWhereUniqueInput!): Post
   updateManyPosts(data: PostUpdateManyMutationInput!, where: PostWhereInput): BatchPayload!
@@ -1339,6 +1567,9 @@ type Query {
   gluon(where: GluonWhereUniqueInput!): Gluon
   gluons(where: GluonWhereInput, orderBy: GluonOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Gluon]!
   gluonsConnection(where: GluonWhereInput, orderBy: GluonOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): GluonConnection!
+  gluonType(where: GluonTypeWhereUniqueInput!): GluonType
+  gluonTypes(where: GluonTypeWhereInput, orderBy: GluonTypeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [GluonType]!
+  gluonTypesConnection(where: GluonTypeWhereInput, orderBy: GluonTypeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): GluonTypeConnection!
   post(where: PostWhereUniqueInput!): Post
   posts(where: PostWhereInput, orderBy: PostOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Post]!
   postsConnection(where: PostWhereInput, orderBy: PostOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PostConnection!
@@ -1356,6 +1587,7 @@ type Query {
 
 type Subscription {
   gluon(where: GluonSubscriptionWhereInput): GluonSubscriptionPayload
+  gluonType(where: GluonTypeSubscriptionWhereInput): GluonTypeSubscriptionPayload
   post(where: PostSubscriptionWhereInput): PostSubscriptionPayload
   quark(where: QuarkSubscriptionWhereInput): QuarkSubscriptionPayload
   quarkType(where: QuarkTypeSubscriptionWhereInput): QuarkTypeSubscriptionPayload

@@ -5,6 +5,7 @@ type Query {
   quarks: [Quark!]!
   gluons: [Gluon!]!
   quarkTypes: [QuarkType!]!
+  gluonTypes: [GluonType!]!
   users: [User!]!
   publishedPosts: [Post!]!
   post(postId: ID!): Post
@@ -42,6 +43,14 @@ type Mutation {
 	sort1: Int,
 	sort2: Int
 	): QuarkType
+
+  createGluonType(
+        name: String,
+	caption: String,
+	captionJa: DateTime,
+	sort1: Int,
+	sort2: Int
+	): GluonType
 
   createUser(name: String!, password: String!): User
   deleteUser(userId: ID!): User
@@ -102,6 +111,17 @@ type QuarkType {
   endProp: String!
   hasGender: Boolean
   sort: Int!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type GluonType {
+  id: ID!
+  name: String!
+  caption: String!
+  captionJa: String!
+  sort1: Int!
+  sort2: Int!
   createdAt: DateTime!
   updatedAt: DateTime!
 }

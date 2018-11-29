@@ -46,6 +46,7 @@ type Gluon {
   activeQuark: Quark! @relation(name: "Actives")
   passiveQuark: Quark! @relation(name: "Passives")
   relation: String!
+  suffix: String
   start: DateTime
   end: DateTime
   startAccuracy: String
@@ -68,6 +69,17 @@ type QuarkType {
   startProp: String!
   endProp: String!
   hasGender: Boolean @default(value: "false")
+  sort1: Int!
+  sort2: Int!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type GluonType {
+  id: ID! @unique
+  name: String! @unique
+  caption: String!
+  captionJa: String!
   sort1: Int!
   sort2: Int!
   createdAt: DateTime!

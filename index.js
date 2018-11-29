@@ -15,6 +15,9 @@ const resolvers = {
     quarkTypes(root, args, context) {
       return context.prisma.quarkTypes()
     },
+    gluonTypes(root, args, context) {
+      return context.prisma.gluonTypes()
+    },
     users(root, args, context) {
       return context.prisma.users()
     },
@@ -39,6 +42,16 @@ const resolvers = {
           startProp: args.startProp,
           endProp: args.endProp,
           hasGender: args.hasGender,
+          sort1: args.sort1,
+          sort2: args.sort2,
+        },
+      )
+    },
+    createGluonType(root, args, context) {
+      return context.prisma.createGluonType(
+        { name: args.name,
+          caption: args.caption,
+          captionJa: args.captionJa,
           sort1: args.sort1,
           sort2: args.sort2,
         },

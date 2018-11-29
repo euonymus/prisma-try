@@ -9,6 +9,10 @@ var models = [
     embedded: false
   },
   {
+    name: "GluonType",
+    embedded: false
+  },
+  {
     name: "Post",
     embedded: false
   },
