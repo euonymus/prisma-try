@@ -19,6 +19,7 @@ type Post {
 type Quark {
   id: ID! @unique
   name: String! @unique
+  imagePath: String
   description: String
   start: DateTime
   end: DateTime
@@ -26,10 +27,14 @@ type Quark {
   endAccuracy: String
   isMomentary: Boolean @default(value: "false")
   url: String
+  affiliate: String
+  gender: Boolean
   isPrivate: Boolean @default(value: "false")
   isExclusive: Boolean @default(value: "false")
   author: User @relation(name: "QuarkUser")
   lastModifiedUser: User @relation(name: "QuarkLastModifiedUser")
+  wid: Int
+  quarkType: QuarkType
   createdAt: DateTime!
   updatedAt: DateTime!
   actives: [Gluon!]! @relation(name: "Actives")

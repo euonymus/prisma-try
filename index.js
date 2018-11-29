@@ -58,6 +58,9 @@ const resolvers = {
             name: args.name,
             lastModifiedUser: {
               connect: { id: args.userId }
+            },
+            quarkType: {
+              connect: { id: args.quarkTypeId }
             }
           },
         },
@@ -158,6 +161,11 @@ const resolvers = {
       return context.prisma.quark({
         id: root.id
       }).lastModifiedUser()
+    },
+    quarkType(root, args, context) {
+      return context.prisma.quark({
+        id: root.id
+      }).quarkType()
     }
   },
   Gluon: {

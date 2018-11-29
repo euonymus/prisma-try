@@ -594,6 +594,7 @@ input PostWhereUniqueInput {
 type Quark {
   id: ID!
   name: String!
+  imagePath: String
   description: String
   start: DateTime
   end: DateTime
@@ -601,10 +602,14 @@ type Quark {
   endAccuracy: String
   isMomentary: Boolean
   url: String
+  affiliate: String
+  gender: Boolean
   isPrivate: Boolean
   isExclusive: Boolean
   author: User
   lastModifiedUser: User
+  wid: Int
+  quarkType: QuarkType
   createdAt: DateTime!
   updatedAt: DateTime!
   actives(where: GluonWhereInput, orderBy: GluonOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Gluon!]
@@ -619,6 +624,7 @@ type QuarkConnection {
 
 input QuarkCreateInput {
   name: String!
+  imagePath: String
   description: String
   start: DateTime
   end: DateTime
@@ -626,10 +632,14 @@ input QuarkCreateInput {
   endAccuracy: String
   isMomentary: Boolean
   url: String
+  affiliate: String
+  gender: Boolean
   isPrivate: Boolean
   isExclusive: Boolean
   author: UserCreateOneInput
   lastModifiedUser: UserCreateOneInput
+  wid: Int
+  quarkType: QuarkTypeCreateOneInput
   actives: GluonCreateManyWithoutActiveQuarkInput
   passives: GluonCreateManyWithoutPassiveQuarkInput
 }
@@ -646,6 +656,7 @@ input QuarkCreateOneWithoutPassivesInput {
 
 input QuarkCreateWithoutActivesInput {
   name: String!
+  imagePath: String
   description: String
   start: DateTime
   end: DateTime
@@ -653,15 +664,20 @@ input QuarkCreateWithoutActivesInput {
   endAccuracy: String
   isMomentary: Boolean
   url: String
+  affiliate: String
+  gender: Boolean
   isPrivate: Boolean
   isExclusive: Boolean
   author: UserCreateOneInput
   lastModifiedUser: UserCreateOneInput
+  wid: Int
+  quarkType: QuarkTypeCreateOneInput
   passives: GluonCreateManyWithoutPassiveQuarkInput
 }
 
 input QuarkCreateWithoutPassivesInput {
   name: String!
+  imagePath: String
   description: String
   start: DateTime
   end: DateTime
@@ -669,10 +685,14 @@ input QuarkCreateWithoutPassivesInput {
   endAccuracy: String
   isMomentary: Boolean
   url: String
+  affiliate: String
+  gender: Boolean
   isPrivate: Boolean
   isExclusive: Boolean
   author: UserCreateOneInput
   lastModifiedUser: UserCreateOneInput
+  wid: Int
+  quarkType: QuarkTypeCreateOneInput
   actives: GluonCreateManyWithoutActiveQuarkInput
 }
 
@@ -686,6 +706,8 @@ enum QuarkOrderByInput {
   id_DESC
   name_ASC
   name_DESC
+  imagePath_ASC
+  imagePath_DESC
   description_ASC
   description_DESC
   start_ASC
@@ -700,10 +722,16 @@ enum QuarkOrderByInput {
   isMomentary_DESC
   url_ASC
   url_DESC
+  affiliate_ASC
+  affiliate_DESC
+  gender_ASC
+  gender_DESC
   isPrivate_ASC
   isPrivate_DESC
   isExclusive_ASC
   isExclusive_DESC
+  wid_ASC
+  wid_DESC
   createdAt_ASC
   createdAt_DESC
   updatedAt_ASC
@@ -713,6 +741,7 @@ enum QuarkOrderByInput {
 type QuarkPreviousValues {
   id: ID!
   name: String!
+  imagePath: String
   description: String
   start: DateTime
   end: DateTime
@@ -720,8 +749,11 @@ type QuarkPreviousValues {
   endAccuracy: String
   isMomentary: Boolean
   url: String
+  affiliate: String
+  gender: Boolean
   isPrivate: Boolean
   isExclusive: Boolean
+  wid: Int
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -773,6 +805,11 @@ input QuarkTypeCreateInput {
   hasGender: Boolean
   sort1: Int!
   sort2: Int!
+}
+
+input QuarkTypeCreateOneInput {
+  create: QuarkTypeCreateInput
+  connect: QuarkTypeWhereUniqueInput
 }
 
 type QuarkTypeEdge {
@@ -837,6 +874,17 @@ input QuarkTypeSubscriptionWhereInput {
   NOT: [QuarkTypeSubscriptionWhereInput!]
 }
 
+input QuarkTypeUpdateDataInput {
+  name: String
+  imagePath: String
+  nameProp: String
+  startProp: String
+  endProp: String
+  hasGender: Boolean
+  sort1: Int
+  sort2: Int
+}
+
 input QuarkTypeUpdateInput {
   name: String
   imagePath: String
@@ -857,6 +905,20 @@ input QuarkTypeUpdateManyMutationInput {
   hasGender: Boolean
   sort1: Int
   sort2: Int
+}
+
+input QuarkTypeUpdateOneInput {
+  create: QuarkTypeCreateInput
+  update: QuarkTypeUpdateDataInput
+  upsert: QuarkTypeUpsertNestedInput
+  delete: Boolean
+  disconnect: Boolean
+  connect: QuarkTypeWhereUniqueInput
+}
+
+input QuarkTypeUpsertNestedInput {
+  update: QuarkTypeUpdateDataInput!
+  create: QuarkTypeCreateInput!
 }
 
 input QuarkTypeWhereInput {
@@ -990,6 +1052,7 @@ input QuarkTypeWhereUniqueInput {
 
 input QuarkUpdateInput {
   name: String
+  imagePath: String
   description: String
   start: DateTime
   end: DateTime
@@ -997,16 +1060,21 @@ input QuarkUpdateInput {
   endAccuracy: String
   isMomentary: Boolean
   url: String
+  affiliate: String
+  gender: Boolean
   isPrivate: Boolean
   isExclusive: Boolean
   author: UserUpdateOneInput
   lastModifiedUser: UserUpdateOneInput
+  wid: Int
+  quarkType: QuarkTypeUpdateOneInput
   actives: GluonUpdateManyWithoutActiveQuarkInput
   passives: GluonUpdateManyWithoutPassiveQuarkInput
 }
 
 input QuarkUpdateManyMutationInput {
   name: String
+  imagePath: String
   description: String
   start: DateTime
   end: DateTime
@@ -1014,8 +1082,11 @@ input QuarkUpdateManyMutationInput {
   endAccuracy: String
   isMomentary: Boolean
   url: String
+  affiliate: String
+  gender: Boolean
   isPrivate: Boolean
   isExclusive: Boolean
+  wid: Int
 }
 
 input QuarkUpdateOneRequiredWithoutActivesInput {
@@ -1034,6 +1105,7 @@ input QuarkUpdateOneRequiredWithoutPassivesInput {
 
 input QuarkUpdateWithoutActivesDataInput {
   name: String
+  imagePath: String
   description: String
   start: DateTime
   end: DateTime
@@ -1041,15 +1113,20 @@ input QuarkUpdateWithoutActivesDataInput {
   endAccuracy: String
   isMomentary: Boolean
   url: String
+  affiliate: String
+  gender: Boolean
   isPrivate: Boolean
   isExclusive: Boolean
   author: UserUpdateOneInput
   lastModifiedUser: UserUpdateOneInput
+  wid: Int
+  quarkType: QuarkTypeUpdateOneInput
   passives: GluonUpdateManyWithoutPassiveQuarkInput
 }
 
 input QuarkUpdateWithoutPassivesDataInput {
   name: String
+  imagePath: String
   description: String
   start: DateTime
   end: DateTime
@@ -1057,10 +1134,14 @@ input QuarkUpdateWithoutPassivesDataInput {
   endAccuracy: String
   isMomentary: Boolean
   url: String
+  affiliate: String
+  gender: Boolean
   isPrivate: Boolean
   isExclusive: Boolean
   author: UserUpdateOneInput
   lastModifiedUser: UserUpdateOneInput
+  wid: Int
+  quarkType: QuarkTypeUpdateOneInput
   actives: GluonUpdateManyWithoutActiveQuarkInput
 }
 
@@ -1103,6 +1184,20 @@ input QuarkWhereInput {
   name_not_starts_with: String
   name_ends_with: String
   name_not_ends_with: String
+  imagePath: String
+  imagePath_not: String
+  imagePath_in: [String!]
+  imagePath_not_in: [String!]
+  imagePath_lt: String
+  imagePath_lte: String
+  imagePath_gt: String
+  imagePath_gte: String
+  imagePath_contains: String
+  imagePath_not_contains: String
+  imagePath_starts_with: String
+  imagePath_not_starts_with: String
+  imagePath_ends_with: String
+  imagePath_not_ends_with: String
   description: String
   description_not: String
   description_in: [String!]
@@ -1177,12 +1272,37 @@ input QuarkWhereInput {
   url_not_starts_with: String
   url_ends_with: String
   url_not_ends_with: String
+  affiliate: String
+  affiliate_not: String
+  affiliate_in: [String!]
+  affiliate_not_in: [String!]
+  affiliate_lt: String
+  affiliate_lte: String
+  affiliate_gt: String
+  affiliate_gte: String
+  affiliate_contains: String
+  affiliate_not_contains: String
+  affiliate_starts_with: String
+  affiliate_not_starts_with: String
+  affiliate_ends_with: String
+  affiliate_not_ends_with: String
+  gender: Boolean
+  gender_not: Boolean
   isPrivate: Boolean
   isPrivate_not: Boolean
   isExclusive: Boolean
   isExclusive_not: Boolean
   author: UserWhereInput
   lastModifiedUser: UserWhereInput
+  wid: Int
+  wid_not: Int
+  wid_in: [Int!]
+  wid_not_in: [Int!]
+  wid_lt: Int
+  wid_lte: Int
+  wid_gt: Int
+  wid_gte: Int
+  quarkType: QuarkTypeWhereInput
   createdAt: DateTime
   createdAt_not: DateTime
   createdAt_in: [DateTime!]

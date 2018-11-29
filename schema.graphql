@@ -23,6 +23,7 @@ type Mutation {
 	endAccuracy: String,
 	isMomentary: Boolean,
 	url: String,
+	quarkTypeId: ID
 	isPrivate: Boolean,
 	isExclusive: Boolean,
 	userId: ID
@@ -51,6 +52,7 @@ type Mutation {
 type Quark {
   id: ID!
   name: String!
+  imagePath: String
   description: String
   start: DateTime
   end: DateTime
@@ -58,10 +60,14 @@ type Quark {
   endAccuracy: String
   isMomentary: Boolean
   url: String
+  affiliate: String
+  gender: Boolean
   isPrivate: Boolean
   isExclusive: Boolean
   author: User
   lastModifiedUser: User
+  wid: Int
+  quarkType: QuarkType
   createdAt: DateTime!
   updatedAt: DateTime!
   actives: [Gluon!]!
