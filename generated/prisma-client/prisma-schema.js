@@ -34,7 +34,7 @@ type Gluon {
   url: String
   isPrivate: Boolean
   isExclusive: Boolean
-  userId: User
+  author: User
   lastModifiedUser: User
   createdAt: DateTime!
   updatedAt: DateTime!
@@ -58,7 +58,7 @@ input GluonCreateInput {
   url: String
   isPrivate: Boolean
   isExclusive: Boolean
-  userId: UserCreateOneInput
+  author: UserCreateOneInput
   lastModifiedUser: UserCreateOneInput
 }
 
@@ -83,7 +83,7 @@ input GluonCreateWithoutActiveQuarkInput {
   url: String
   isPrivate: Boolean
   isExclusive: Boolean
-  userId: UserCreateOneInput
+  author: UserCreateOneInput
   lastModifiedUser: UserCreateOneInput
 }
 
@@ -98,7 +98,7 @@ input GluonCreateWithoutPassiveQuarkInput {
   url: String
   isPrivate: Boolean
   isExclusive: Boolean
-  userId: UserCreateOneInput
+  author: UserCreateOneInput
   lastModifiedUser: UserCreateOneInput
 }
 
@@ -179,7 +179,7 @@ input GluonUpdateInput {
   url: String
   isPrivate: Boolean
   isExclusive: Boolean
-  userId: UserUpdateOneInput
+  author: UserUpdateOneInput
   lastModifiedUser: UserUpdateOneInput
 }
 
@@ -224,7 +224,7 @@ input GluonUpdateWithoutActiveQuarkDataInput {
   url: String
   isPrivate: Boolean
   isExclusive: Boolean
-  userId: UserUpdateOneInput
+  author: UserUpdateOneInput
   lastModifiedUser: UserUpdateOneInput
 }
 
@@ -239,7 +239,7 @@ input GluonUpdateWithoutPassiveQuarkDataInput {
   url: String
   isPrivate: Boolean
   isExclusive: Boolean
-  userId: UserUpdateOneInput
+  author: UserUpdateOneInput
   lastModifiedUser: UserUpdateOneInput
 }
 
@@ -360,7 +360,7 @@ input GluonWhereInput {
   isPrivate_not: Boolean
   isExclusive: Boolean
   isExclusive_not: Boolean
-  userId: UserWhereInput
+  author: UserWhereInput
   lastModifiedUser: UserWhereInput
   createdAt: DateTime
   createdAt_not: DateTime
@@ -593,7 +593,7 @@ type Quark {
   url: String
   isPrivate: Boolean
   isExclusive: Boolean
-  userId: User
+  author: User
   lastModifiedUser: User
   createdAt: DateTime!
   updatedAt: DateTime!
@@ -618,7 +618,7 @@ input QuarkCreateInput {
   url: String
   isPrivate: Boolean
   isExclusive: Boolean
-  userId: UserCreateOneInput
+  author: UserCreateOneInput
   lastModifiedUser: UserCreateOneInput
   actives: GluonCreateManyWithoutActiveQuarkInput
   passives: GluonCreateManyWithoutPassiveQuarkInput
@@ -645,7 +645,7 @@ input QuarkCreateWithoutActivesInput {
   url: String
   isPrivate: Boolean
   isExclusive: Boolean
-  userId: UserCreateOneInput
+  author: UserCreateOneInput
   lastModifiedUser: UserCreateOneInput
   passives: GluonCreateManyWithoutPassiveQuarkInput
 }
@@ -661,7 +661,7 @@ input QuarkCreateWithoutPassivesInput {
   url: String
   isPrivate: Boolean
   isExclusive: Boolean
-  userId: UserCreateOneInput
+  author: UserCreateOneInput
   lastModifiedUser: UserCreateOneInput
   actives: GluonCreateManyWithoutActiveQuarkInput
 }
@@ -745,7 +745,7 @@ input QuarkUpdateInput {
   url: String
   isPrivate: Boolean
   isExclusive: Boolean
-  userId: UserUpdateOneInput
+  author: UserUpdateOneInput
   lastModifiedUser: UserUpdateOneInput
   actives: GluonUpdateManyWithoutActiveQuarkInput
   passives: GluonUpdateManyWithoutPassiveQuarkInput
@@ -789,7 +789,7 @@ input QuarkUpdateWithoutActivesDataInput {
   url: String
   isPrivate: Boolean
   isExclusive: Boolean
-  userId: UserUpdateOneInput
+  author: UserUpdateOneInput
   lastModifiedUser: UserUpdateOneInput
   passives: GluonUpdateManyWithoutPassiveQuarkInput
 }
@@ -805,7 +805,7 @@ input QuarkUpdateWithoutPassivesDataInput {
   url: String
   isPrivate: Boolean
   isExclusive: Boolean
-  userId: UserUpdateOneInput
+  author: UserUpdateOneInput
   lastModifiedUser: UserUpdateOneInput
   actives: GluonUpdateManyWithoutActiveQuarkInput
 }
@@ -927,7 +927,7 @@ input QuarkWhereInput {
   isPrivate_not: Boolean
   isExclusive: Boolean
   isExclusive_not: Boolean
-  userId: UserWhereInput
+  author: UserWhereInput
   lastModifiedUser: UserWhereInput
   createdAt: DateTime
   createdAt_not: DateTime

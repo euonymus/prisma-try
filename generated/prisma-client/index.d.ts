@@ -339,7 +339,7 @@ export interface GluonUpdateWithoutActiveQuarkDataInput {
   url?: String;
   isPrivate?: Boolean;
   isExclusive?: Boolean;
-  userId?: UserUpdateOneInput;
+  author?: UserUpdateOneInput;
   lastModifiedUser?: UserUpdateOneInput;
 }
 
@@ -510,7 +510,7 @@ export interface QuarkWhereInput {
   isPrivate_not?: Boolean;
   isExclusive?: Boolean;
   isExclusive_not?: Boolean;
-  userId?: UserWhereInput;
+  author?: UserWhereInput;
   lastModifiedUser?: UserWhereInput;
   createdAt?: DateTimeInput;
   createdAt_not?: DateTimeInput;
@@ -550,7 +550,7 @@ export interface GluonCreateWithoutPassiveQuarkInput {
   url?: String;
   isPrivate?: Boolean;
   isExclusive?: Boolean;
-  userId?: UserCreateOneInput;
+  author?: UserCreateOneInput;
   lastModifiedUser?: UserCreateOneInput;
 }
 
@@ -590,7 +590,7 @@ export interface QuarkCreateWithoutPassivesInput {
   url?: String;
   isPrivate?: Boolean;
   isExclusive?: Boolean;
-  userId?: UserCreateOneInput;
+  author?: UserCreateOneInput;
   lastModifiedUser?: UserCreateOneInput;
   actives?: GluonCreateManyWithoutActiveQuarkInput;
 }
@@ -622,7 +622,7 @@ export interface GluonCreateWithoutActiveQuarkInput {
   url?: String;
   isPrivate?: Boolean;
   isExclusive?: Boolean;
-  userId?: UserCreateOneInput;
+  author?: UserCreateOneInput;
   lastModifiedUser?: UserCreateOneInput;
 }
 
@@ -643,7 +643,7 @@ export interface GluonUpdateInput {
   url?: String;
   isPrivate?: Boolean;
   isExclusive?: Boolean;
-  userId?: UserUpdateOneInput;
+  author?: UserUpdateOneInput;
   lastModifiedUser?: UserUpdateOneInput;
 }
 
@@ -680,7 +680,7 @@ export interface QuarkUpdateWithoutActivesDataInput {
   url?: String;
   isPrivate?: Boolean;
   isExclusive?: Boolean;
-  userId?: UserUpdateOneInput;
+  author?: UserUpdateOneInput;
   lastModifiedUser?: UserUpdateOneInput;
   passives?: GluonUpdateManyWithoutPassiveQuarkInput;
 }
@@ -956,7 +956,7 @@ export interface GluonWhereInput {
   isPrivate_not?: Boolean;
   isExclusive?: Boolean;
   isExclusive_not?: Boolean;
-  userId?: UserWhereInput;
+  author?: UserWhereInput;
   lastModifiedUser?: UserWhereInput;
   createdAt?: DateTimeInput;
   createdAt_not?: DateTimeInput;
@@ -1009,7 +1009,7 @@ export interface QuarkCreateInput {
   url?: String;
   isPrivate?: Boolean;
   isExclusive?: Boolean;
-  userId?: UserCreateOneInput;
+  author?: UserCreateOneInput;
   lastModifiedUser?: UserCreateOneInput;
   actives?: GluonCreateManyWithoutActiveQuarkInput;
   passives?: GluonCreateManyWithoutPassiveQuarkInput;
@@ -1069,7 +1069,7 @@ export interface GluonUpdateWithoutPassiveQuarkDataInput {
   url?: String;
   isPrivate?: Boolean;
   isExclusive?: Boolean;
-  userId?: UserUpdateOneInput;
+  author?: UserUpdateOneInput;
   lastModifiedUser?: UserUpdateOneInput;
 }
 
@@ -1084,7 +1084,7 @@ export interface QuarkCreateWithoutActivesInput {
   url?: String;
   isPrivate?: Boolean;
   isExclusive?: Boolean;
-  userId?: UserCreateOneInput;
+  author?: UserCreateOneInput;
   lastModifiedUser?: UserCreateOneInput;
   passives?: GluonCreateManyWithoutPassiveQuarkInput;
 }
@@ -1147,7 +1147,7 @@ export interface QuarkUpdateWithoutPassivesDataInput {
   url?: String;
   isPrivate?: Boolean;
   isExclusive?: Boolean;
-  userId?: UserUpdateOneInput;
+  author?: UserUpdateOneInput;
   lastModifiedUser?: UserUpdateOneInput;
   actives?: GluonUpdateManyWithoutActiveQuarkInput;
 }
@@ -1176,7 +1176,7 @@ export interface QuarkUpdateInput {
   url?: String;
   isPrivate?: Boolean;
   isExclusive?: Boolean;
-  userId?: UserUpdateOneInput;
+  author?: UserUpdateOneInput;
   lastModifiedUser?: UserUpdateOneInput;
   actives?: GluonUpdateManyWithoutActiveQuarkInput;
   passives?: GluonUpdateManyWithoutPassiveQuarkInput;
@@ -1205,7 +1205,7 @@ export interface GluonCreateInput {
   url?: String;
   isPrivate?: Boolean;
   isExclusive?: Boolean;
-  userId?: UserCreateOneInput;
+  author?: UserCreateOneInput;
   lastModifiedUser?: UserCreateOneInput;
 }
 
@@ -1567,7 +1567,7 @@ export interface GluonPromise extends Promise<Gluon>, Fragmentable {
   url: () => Promise<String>;
   isPrivate: () => Promise<Boolean>;
   isExclusive: () => Promise<Boolean>;
-  userId: <T = UserPromise>() => T;
+  author: <T = UserPromise>() => T;
   lastModifiedUser: <T = UserPromise>() => T;
   createdAt: () => Promise<DateTimeOutput>;
   updatedAt: () => Promise<DateTimeOutput>;
@@ -1588,7 +1588,7 @@ export interface GluonSubscription
   url: () => Promise<AsyncIterator<String>>;
   isPrivate: () => Promise<AsyncIterator<Boolean>>;
   isExclusive: () => Promise<AsyncIterator<Boolean>>;
-  userId: <T = UserSubscription>() => T;
+  author: <T = UserSubscription>() => T;
   lastModifiedUser: <T = UserSubscription>() => T;
   createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
   updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
@@ -1679,7 +1679,7 @@ export interface QuarkPromise extends Promise<Quark>, Fragmentable {
   url: () => Promise<String>;
   isPrivate: () => Promise<Boolean>;
   isExclusive: () => Promise<Boolean>;
-  userId: <T = UserPromise>() => T;
+  author: <T = UserPromise>() => T;
   lastModifiedUser: <T = UserPromise>() => T;
   createdAt: () => Promise<DateTimeOutput>;
   updatedAt: () => Promise<DateTimeOutput>;
@@ -1721,7 +1721,7 @@ export interface QuarkSubscription
   url: () => Promise<AsyncIterator<String>>;
   isPrivate: () => Promise<AsyncIterator<Boolean>>;
   isExclusive: () => Promise<AsyncIterator<Boolean>>;
-  userId: <T = UserSubscription>() => T;
+  author: <T = UserSubscription>() => T;
   lastModifiedUser: <T = UserSubscription>() => T;
   createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
   updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;

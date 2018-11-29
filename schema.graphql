@@ -12,6 +12,19 @@ type Query {
 
 type Mutation {
   createQuark(name: String!, description: String!): Quark
+  updateQuark(quarkId: ID!,
+  	      name: String,
+	      description: String,
+	      start: DateTime,
+	      end: DateTime,
+	      startAccuracy: String,
+	      endAccuracy: String,
+	      isMomentary: Boolean,
+	      url: String,
+	      isPrivate: Boolean,
+	      isExclusive: Boolean,
+	      userId: ID
+	      ): Quark
   createGluon(activeId: ID!, passiveId: ID!, relation: String!): Gluon
   deleteQuark(quarkId: ID!): Quark
   deleteGluon(gluonId: ID!): Gluon
@@ -33,7 +46,7 @@ type Quark {
   url: String
   isPrivate: Boolean
   isExclusive: Boolean
-  userId: User
+  author: User
   lastModifiedUser: User
   createdAt: DateTime!
   updatedAt: DateTime!
@@ -54,7 +67,7 @@ type Gluon {
   url: String
   isPrivate: Boolean
   isExclusive: Boolean
-  userId: User
+  author: User
   lastModifiedUser: User
   createdAt: DateTime!
   updatedAt: DateTime!

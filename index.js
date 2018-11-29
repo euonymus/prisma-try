@@ -33,6 +33,19 @@ const resolvers = {
         { name: args.name, description: args.description },
       )
     },
+    updateQuark(root, args, context) {
+      return context.prisma.updateQuark(
+        {
+          where: { id: args.quarkId },
+          data: {
+            name: args.name,
+            lastModifiedUser: {
+              connect: { id: args.userId }
+            }
+          },
+        },
+      )
+    },
     deleteQuark(root, args, context) {
       return context.prisma.deleteQuark(
         {
@@ -118,6 +131,16 @@ const resolvers = {
       return context.prisma.quark({
         id: root.id
       }).passives()
+    },
+    author(root, args, context) {
+      return context.prisma.quark({
+        id: root.id
+      }).author()
+    },
+    lastModifiedUser(root, args, context) {
+      return context.prisma.quark({
+        id: root.id
+      }).lastModifiedUser()
     }
   },
   Gluon: {
@@ -130,6 +153,16 @@ const resolvers = {
       return context.prisma.gluon({
         id: root.id
       }).passiveQuark()
+    },
+    author(root, args, context) {
+      return context.prisma.gluon({
+        id: root.id
+      }).author()
+    },
+    lastModifiedUser(root, args, context) {
+      return context.prisma.gluon({
+        id: root.id
+      }).lastModifiedUser()
     }
   }
 }
